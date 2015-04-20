@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="HomeViewController">
+            <connections>
+                <outlet property="_proWindow" destination="Gyv-s6-Sid" id="kCh-aA-6Zt"/>
+                <outlet property="dragView" destination="2PC-fY-QDH" id="Bva-pa-Qhz"/>
+                <outlet property="pathLabel" destination="hiI-m0-OJk" id="4Gv-Ph-9HH"/>
+                <outlet property="proIndicator" destination="gWe-UQ-Nh4" id="Px5-8t-bpT"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="720" height="500"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2PC-fY-QDH" customClass="DragView">
+                    <rect key="frame" x="85" y="96" width="550" height="345"/>
+                </customView>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beq-Rk-qrv">
+                    <rect key="frame" x="270" y="38" width="180" height="19"/>
+                    <buttonCell key="cell" type="roundRect" title="Click To Add Files" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aK1-d5-YTv">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="583" y="554"/>
+        </customView>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Gyv-s6-Sid">
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="207" width="511" height="60"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <value key="minSize" type="size" width="511" height="60"/>
+            <value key="maxSize" type="size" width="511" height="60"/>
+            <view key="contentView" id="Knp-fs-PZX">
+                <rect key="frame" x="0.0" y="0.0" width="511" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-m0-OJk">
+                        <rect key="frame" x="18" y="32" width="475" height="17"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Label" id="z6U-Bd-fcO">
+                            <font key="font" metaFont="system" size="10"/>
+                            <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="gWe-UQ-Nh4">
+                        <rect key="frame" x="20" y="5" width="471" height="20"/>
+                    </progressIndicator>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="556.5" y="-19"/>
+        </window>
+    </objects>
+</document>

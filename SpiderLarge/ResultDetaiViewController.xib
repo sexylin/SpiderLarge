@@ -8,6 +8,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultDetaiViewController">
             <connections>
+                <outlet property="ruleEditor" destination="GMr-6E-y98" id="ZQI-US-cWr"/>
+                <outlet property="ruleWindow" destination="HFq-QG-fFx" id="4kY-vf-dss"/>
                 <outlet property="table" destination="2ZG-HX-MK3" id="84t-Id-Tmk"/>
                 <outlet property="toolBar" destination="ZS7-fp-N6o" id="QTJ-Po-zH1"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -121,11 +123,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="720" height="48"/>
                     <subviews>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WmR-Q2-O6X">
-                            <rect key="frame" x="30" y="12" width="122" height="23"/>
-                            <buttonCell key="cell" type="bevel" title="Open In Finder" bezelStyle="regularSquare" image="button_cl" imagePosition="overlaps" alignment="center" state="on" imageScaling="axesIndependently" inset="2" id="nKF-y8-kWU">
+                            <rect key="frame" x="30" y="12" width="127" height="23"/>
+                            <buttonCell key="cell" type="bevel" title="Custome your types" bezelStyle="regularSquare" image="button_cl" imagePosition="overlaps" alignment="center" state="on" imageScaling="axesIndependently" inset="2" id="nKF-y8-kWU">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="customYourTypes:" target="-2" id="Nmh-By-ThA"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ifq-be-WCN">
                             <rect key="frame" x="210" y="10" width="122" height="28"/>
@@ -168,6 +173,76 @@
                 </menuItem>
             </items>
         </menu>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="HFq-QG-fFx">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="207" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="xhK-Hh-Neb">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wMD-Hv-u99">
+                        <rect key="frame" x="27" y="228" width="155" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Your category's name:" id="d5p-YU-osC">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-4C-QHm">
+                        <rect key="frame" x="31" y="198" width="417" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="k1P-L8-bL2">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uh9-X8-FwH">
+                        <rect key="frame" x="29" y="174" width="421" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Contains suffixes (exp: mp3,mp4):" id="Xp5-mW-wph">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCj-0J-6Rd">
+                        <rect key="frame" x="29" y="54" width="419" height="112"/>
+                        <clipView key="contentView" misplaced="YES" id="7TD-1w-Boc">
+                            <rect key="frame" x="1" y="1" width="238" height="133"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <ruleEditor nestingMode="list" canRemoveAllRows="YES" rowHeight="25" id="GMr-6E-y98">
+                                    <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="u8r-af-Vhk"/>
+                                    </connections>
+                                </ruleEditor>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1qu-e7-f7Z">
+                            <rect key="frame" x="-100" y="-100" width="223" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="4eW-AQ-ng6">
+                            <rect key="frame" x="224" y="1" width="15" height="118"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYT-aI-3ZU">
+                        <rect key="frame" x="23" y="19" width="92" height="32"/>
+                        <buttonCell key="cell" type="push" title="Add row" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lhg-jw-XcU">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="addRow:" target="GMr-6E-y98" id="kwU-2C-AYg"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+        </window>
     </objects>
     <resources>
         <image name="button_cl" width="220" height="45"/>

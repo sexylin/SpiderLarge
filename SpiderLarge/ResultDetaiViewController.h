@@ -25,11 +25,13 @@ typedef NSInteger SortType;
 
 @end
 
-@interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate>{
+@interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate,NSRuleEditorDelegate>{
     SortType _sortType;
 }
 @property (assign)IBOutlet NSOutlineView *table;
+@property (assign)IBOutlet NSRuleEditor  *ruleEditor;
 @property (assign)IBOutlet UIView *toolBar;
+@property (assign)IBOutlet NSWindow *ruleWindow;
 
 @end
 

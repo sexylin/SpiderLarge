@@ -17,6 +17,8 @@
     NSMutableDictionary *_cellQueue;
     NSMutableArray *_selectArr;
     NSMutableArray *_nodes;
+    
+    NSMutableArray *_rulesArr;
 }
 
 @end
@@ -28,6 +30,8 @@
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
     _nodes = [[NSMutableArray alloc]init];
+    _rulesArr = [[NSMutableArray alloc]init];
+    [_rulesArr addObject:@"suffix"];
     
     self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
     self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
@@ -67,6 +71,12 @@
     }
     [_selectArr removeObjectsInArray:removes];
     [self sortFiles:_sortType];
+}
+
+- (IBAction)customYourTypes:(id)sender{
+    [self.view.window beginSheet:self.ruleWindow completionHandler:^(NSModalResponse returnCode) {
+        [self.ruleEditor addRow:self];
+    }];
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo{
@@ -399,6 +409,24 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item{
     return YES;
 }
+
+
+#pragma mark - rules delegate
+- (NSInteger)ruleEditor:(NSRuleEditor *)editor numberOfChildrenForCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType{
+    if(criterion == nil)return [_rulesArr count];
+    return 0;
+}
+
+- (id)ruleEditor:(NSRuleEditor *)editor child:(NSInteger)index forCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType{
+    return [_rulesArr objectAtIndex:index];
+}
+
+- (id)ruleEditor:(NSRuleEditor *)editor displayValueForCriterion:(id)criterion inRow:(NSInteger)row{
+    NSTextField *field = [[NSTextField alloc]initWithFrame:CGRectMake(0, 0, 120, 19)];
+    field.placeholderString = @"Add a new suffix here";
+    return field;
+}
+
 @end
 
 @implementation ResultCellView{

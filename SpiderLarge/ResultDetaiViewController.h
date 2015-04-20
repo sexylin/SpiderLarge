@@ -11,8 +11,7 @@
 #import <Quartz/Quartz.h>
 
 enum{
-    SortByType = 0,
-    SortBySize,
+    SortBySize = 0,
     SortByTime,
 };
 typedef NSInteger SortType;

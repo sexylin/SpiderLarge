@@ -36,7 +36,7 @@
 }
 
 - (void)reloadTable{
-    [self sortFiles:SortByType];
+    [self sortFiles:SortBySize];
     [self.table reloadData];
 }
 
@@ -137,9 +137,7 @@
 }
 
 - (IBAction)clickSort:(NSMenuItem *)sender{
-    if([[sender title]isEqualToString:@"Sort by type"]){
-        [self sortFiles:SortByType];
-    }else if ([[sender title]isEqualToString:@"Sort by time"]){
+    if ([[sender title]isEqualToString:@"Sort by time"]){
         [self sortFiles:SortByTime];
     }else if ([[sender title]isEqualToString:@"Sort by size"]){
         [self sortFiles:SortBySize];
@@ -152,69 +150,64 @@
     [_nodes removeAllObjects];
     [_cellQueue removeAllObjects];
     
-    switch (_sortType) {
-        case SortByType:
-        {
-            ScanObj *archiever = [[[ScanObj alloc]init]autorelease];
-            archiever.filePath = @"Archivers";
-            ScanObj *movies = [[[ScanObj alloc]init]autorelease];
-            movies.filePath = @"Movies";
-            ScanObj *music = [[[ScanObj alloc]init]autorelease];
-            music.filePath = @"Music";
-            ScanObj *documents = [[[ScanObj alloc]init]autorelease];
-            documents.filePath = @"Documents";
-            ScanObj *picture = [[[ScanObj alloc]init]autorelease];
-            picture.filePath = @"Picture";
-            ScanObj *other = [[[ScanObj alloc]init]autorelease];
-            other.filePath = @"Others";
-            
-            for(ScanObj *obj in scanner.scanResults){
-                NSString *copyName = [obj.name copy];
-                obj.name = [obj.name lowercaseString];
-                
-                if([obj.name hasSuffix:@"zip"] || [obj.name hasSuffix:@"rar"] || [obj.name hasSuffix:@"7z"] || [obj.name hasSuffix:@"lha"] || [obj.name hasSuffix:@"lhz"] || [obj.name hasSuffix:@"zipx"] || [obj.name hasSuffix:@"sit"] || [obj.name hasSuffix:@"sitx"] || [obj.name hasSuffix:@"hqx"] || [obj.name hasSuffix:@"bin"] || [obj.name hasSuffix:@"macbin"] || [obj.name hasSuffix:@"as"] || [obj.name hasSuffix:@"gz"] || [obj.name hasSuffix:@"gzip"] || [obj.name hasSuffix:@"tgz"] || [obj.name hasSuffix:@"tar-gz"] || [obj.name hasSuffix:@"bz2"] || [obj.name hasSuffix:@"bzip2"] || [obj.name hasSuffix:@"bz"] || [obj.name hasSuffix:@"tbz2"] || [obj.name hasSuffix:@"tbz"] || [obj.name hasSuffix:@"xz"] || [obj.name hasSuffix:@"txz"] || [obj.name hasSuffix:@"tar"] || [obj.name hasSuffix:@"iso"]|| [obj.name hasSuffix:@"cdi"] || [obj.name hasSuffix:@"nrg"] || [obj.name hasSuffix:@"mdf"] || [obj.name hasSuffix:@"gtar"] || [obj.name hasSuffix:@"z"] || [obj.name hasSuffix:@"taz"] || [obj.name hasSuffix:@"tar-z"] || [obj.name hasSuffix:@"rpm"] || [obj.name hasSuffix:@"deb"] || [obj.name hasSuffix:@"dmg"] || [obj.name hasSuffix:@"pkg"]){
-                    if(archiever){
-                        [archiever.subObjects addObject:obj];
-                    }
-                }else if ([obj.name hasSuffix:@"pdf"] || [obj.name hasSuffix:@"doc"]||[obj.name hasSuffix:@"txt"] || [obj.name hasSuffix:@"docx"] || [obj.name hasSuffix:@"xls"] || [obj.name hasSuffix:@"xlsx"] || [obj.name hasSuffix:@"xmind"] || [obj.name hasSuffix:@"pages"] || [obj.name hasSuffix:@"rtf"] || [obj.name hasSuffix:@"equb"] || [obj.name hasSuffix:@"numbers"] || [obj.name hasSuffix:@"key"] || [obj.name hasSuffix:@"ppt"]|| [obj.name hasSuffix:@"epub"]){
-                    if(documents){
-                        [documents.subObjects addObject:obj];
-                    }
-                }else if ([obj.name hasSuffix:@"ts"] || [obj.name hasSuffix:@"3gp"] || [obj.name hasSuffix:@"mov"] || [obj.name hasSuffix:@"mp4"] || [obj.name hasSuffix:@"avi"] || [obj.name hasSuffix:@"mpeg"] || [obj.name hasSuffix:@"mpg"] || [obj.name hasSuffix:@"ps"] || [obj.name hasSuffix:@"vro"] || [obj.name hasSuffix:@"ogm"] || [obj.name hasSuffix:@"mkv"] || [obj.name hasSuffix:@"asf"] || [obj.name hasSuffix:@"wmv"] || [obj.name hasSuffix:@"flv"] || [obj.name hasSuffix:@"rm"] || [obj.name hasSuffix:@"rmvb"] || [obj.name hasSuffix:@"m4v"]){
-                    if(movies){
-                        [movies.subObjects addObject:obj];
-                    }
-                }else if([obj.name hasSuffix:@"jpeg"] ||[obj.name hasSuffix:@"JPEG"]|| [obj.name hasSuffix:@"jpg"]||[obj.name hasSuffix:@"JPG"] || [obj.name hasSuffix:@"png"]||[obj.name hasSuffix:@"tif"]||[obj.name hasSuffix:@"PNG"] || [obj.name hasSuffix:@"gif"] || [obj.name hasSuffix:@"bmp"] || [obj.name hasSuffix:@"tiff"] || [obj.name hasSuffix:@"raw"] || [obj.name hasSuffix:@"mpo"] || [obj.name hasSuffix:@"psd"] || [obj.name hasSuffix:@"icns"] || [obj.name hasSuffix:@"x3f"]||[obj.name hasSuffix:@"cr2"]){
-                    if(picture){
-                        [picture.subObjects addObject:obj];
-                    }
-                }else if ([obj.name hasSuffix:@"wma"] || [obj.name hasSuffix:@"aiff"] || [obj.name hasSuffix:@"midi"] || [obj.name hasSuffix:@"wav"] || [obj.name hasSuffix:@"mp3"] || [obj.name hasSuffix:@"aac"] || [obj.name hasSuffix:@"m4a"] || [obj.name hasSuffix:@"m4r"]|| [obj.name hasSuffix:@"aif"]){
-                    if(music){
-                        [music.subObjects addObject:obj];
-                    }
-                }
-                else{
-                    if(other){
-                        [other.subObjects addObject:obj];
-                    }
-                }
-                obj.name = copyName;
+    ScanObj *archiever = [[[ScanObj alloc]init]autorelease];
+    archiever.filePath = @"Archivers";
+    ScanObj *movies = [[[ScanObj alloc]init]autorelease];
+    movies.filePath = @"Movies";
+    ScanObj *music = [[[ScanObj alloc]init]autorelease];
+    music.filePath = @"Music";
+    ScanObj *documents = [[[ScanObj alloc]init]autorelease];
+    documents.filePath = @"Documents";
+    ScanObj *picture = [[[ScanObj alloc]init]autorelease];
+    picture.filePath = @"Picture";
+    ScanObj *other = [[[ScanObj alloc]init]autorelease];
+    other.filePath = @"Others";
+    
+    for(ScanObj *obj in scanner.scanResults){
+        NSString *copyName = [obj.name copy];
+        obj.name = [obj.name lowercaseString];
+        
+        if([obj.name hasSuffix:@"zip"] || [obj.name hasSuffix:@"rar"] || [obj.name hasSuffix:@"7z"] || [obj.name hasSuffix:@"lha"] || [obj.name hasSuffix:@"lhz"] || [obj.name hasSuffix:@"zipx"] || [obj.name hasSuffix:@"sit"] || [obj.name hasSuffix:@"sitx"] || [obj.name hasSuffix:@"hqx"] || [obj.name hasSuffix:@"bin"] || [obj.name hasSuffix:@"macbin"] || [obj.name hasSuffix:@"as"] || [obj.name hasSuffix:@"gz"] || [obj.name hasSuffix:@"gzip"] || [obj.name hasSuffix:@"tgz"] || [obj.name hasSuffix:@"tar-gz"] || [obj.name hasSuffix:@"bz2"] || [obj.name hasSuffix:@"bzip2"] || [obj.name hasSuffix:@"bz"] || [obj.name hasSuffix:@"tbz2"] || [obj.name hasSuffix:@"tbz"] || [obj.name hasSuffix:@"xz"] || [obj.name hasSuffix:@"txz"] || [obj.name hasSuffix:@"tar"] || [obj.name hasSuffix:@"iso"]|| [obj.name hasSuffix:@"cdi"] || [obj.name hasSuffix:@"nrg"] || [obj.name hasSuffix:@"mdf"] || [obj.name hasSuffix:@"gtar"] || [obj.name hasSuffix:@"z"] || [obj.name hasSuffix:@"taz"] || [obj.name hasSuffix:@"tar-z"] || [obj.name hasSuffix:@"rpm"] || [obj.name hasSuffix:@"deb"] || [obj.name hasSuffix:@"dmg"] || [obj.name hasSuffix:@"pkg"]){
+            if(archiever){
+                [archiever.subObjects addObject:obj];
             }
-            
-            if([archiever.subObjects count]>0)[_nodes addObject:archiever];
-            if([movies.subObjects count]>0)[_nodes addObject:movies];
-            if([music.subObjects count]>0)[_nodes addObject:music];
-            if([documents.subObjects count]>0)[_nodes addObject:documents];
-            if([picture.subObjects count]>0)[_nodes addObject:picture];
-            if([other.subObjects count]>0)[_nodes addObject:other];
-            
-            [self.table reloadData];
+        }else if ([obj.name hasSuffix:@"pdf"] || [obj.name hasSuffix:@"doc"]||[obj.name hasSuffix:@"txt"] || [obj.name hasSuffix:@"docx"] || [obj.name hasSuffix:@"xls"] || [obj.name hasSuffix:@"xlsx"] || [obj.name hasSuffix:@"xmind"] || [obj.name hasSuffix:@"pages"] || [obj.name hasSuffix:@"rtf"] || [obj.name hasSuffix:@"equb"] || [obj.name hasSuffix:@"numbers"] || [obj.name hasSuffix:@"key"] || [obj.name hasSuffix:@"ppt"]|| [obj.name hasSuffix:@"epub"]){
+            if(documents){
+                [documents.subObjects addObject:obj];
+            }
+        }else if ([obj.name hasSuffix:@"ts"] || [obj.name hasSuffix:@"3gp"] || [obj.name hasSuffix:@"mov"] || [obj.name hasSuffix:@"mp4"] || [obj.name hasSuffix:@"avi"] || [obj.name hasSuffix:@"mpeg"] || [obj.name hasSuffix:@"mpg"] || [obj.name hasSuffix:@"ps"] || [obj.name hasSuffix:@"vro"] || [obj.name hasSuffix:@"ogm"] || [obj.name hasSuffix:@"mkv"] || [obj.name hasSuffix:@"asf"] || [obj.name hasSuffix:@"wmv"] || [obj.name hasSuffix:@"flv"] || [obj.name hasSuffix:@"rm"] || [obj.name hasSuffix:@"rmvb"] || [obj.name hasSuffix:@"m4v"]){
+            if(movies){
+                [movies.subObjects addObject:obj];
+            }
+        }else if([obj.name hasSuffix:@"jpeg"] ||[obj.name hasSuffix:@"JPEG"]|| [obj.name hasSuffix:@"jpg"]||[obj.name hasSuffix:@"JPG"] || [obj.name hasSuffix:@"png"]||[obj.name hasSuffix:@"tif"]||[obj.name hasSuffix:@"PNG"] || [obj.name hasSuffix:@"gif"] || [obj.name hasSuffix:@"bmp"] || [obj.name hasSuffix:@"tiff"] || [obj.name hasSuffix:@"raw"] || [obj.name hasSuffix:@"mpo"] || [obj.name hasSuffix:@"psd"] || [obj.name hasSuffix:@"icns"] || [obj.name hasSuffix:@"x3f"]||[obj.name hasSuffix:@"cr2"]){
+            if(picture){
+                [picture.subObjects addObject:obj];
+            }
+        }else if ([obj.name hasSuffix:@"wma"] || [obj.name hasSuffix:@"aiff"] || [obj.name hasSuffix:@"midi"] || [obj.name hasSuffix:@"wav"] || [obj.name hasSuffix:@"mp3"] || [obj.name hasSuffix:@"aac"] || [obj.name hasSuffix:@"m4a"] || [obj.name hasSuffix:@"m4r"]|| [obj.name hasSuffix:@"aif"]){
+            if(music){
+                [music.subObjects addObject:obj];
+            }
         }
-            break;
-            
+        else{
+            if(other){
+                [other.subObjects addObject:obj];
+            }
+        }
+        obj.name = copyName;
+    }
+    
+    if([archiever.subObjects count]>0)[_nodes addObject:archiever];
+    if([movies.subObjects count]>0)[_nodes addObject:movies];
+    if([music.subObjects count]>0)[_nodes addObject:music];
+    if([documents.subObjects count]>0)[_nodes addObject:documents];
+    if([picture.subObjects count]>0)[_nodes addObject:picture];
+    if([other.subObjects count]>0)[_nodes addObject:other];
+    
+    NSComparisonResult(^compareBlock)(id obj1,id obj2);
+    
+    switch (_sortType) {
         case SortByTime:{
-            [_nodes addObjectsFromArray:scanner.scanResults];
-            [_nodes sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            compareBlock = ^NSComparisonResult(id obj1,id obj2){
                 ScanObj *obj_1 = obj1;
                 ScanObj *obj_2 = obj2;
                 
@@ -223,13 +216,19 @@
                 if([obj_1.modifyDate earlierDate:obj_2.modifyDate] == obj_2.modifyDate)
                     return NSOrderedDescending;
                 return NSOrderedSame;
-            }];
+            };
+            
+            [archiever.subObjects sortUsingComparator:compareBlock];
+            [movies.subObjects sortUsingComparator:compareBlock];
+            [documents.subObjects sortUsingComparator:compareBlock];
+            [music.subObjects sortUsingComparator:compareBlock];
+            [picture.subObjects sortUsingComparator:compareBlock];
+            [other.subObjects sortUsingComparator:compareBlock];
             [self.table reloadData];
         }
             break;
         case SortBySize:{
-            [_nodes addObjectsFromArray:scanner.scanResults];
-            [_nodes sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            compareBlock = ^NSComparisonResult(id obj1,id obj2){
                 ScanObj *obj_1 = obj1;
                 ScanObj *obj_2 = obj2;
                 
@@ -238,7 +237,14 @@
                 if(obj_1.fileSize < obj_2.fileSize)
                     return NSOrderedDescending;
                 return NSOrderedSame;
-            }];
+            };
+            
+            [archiever.subObjects sortUsingComparator:compareBlock];
+            [movies.subObjects sortUsingComparator:compareBlock];
+            [documents.subObjects sortUsingComparator:compareBlock];
+            [music.subObjects sortUsingComparator:compareBlock];
+            [picture.subObjects sortUsingComparator:compareBlock];
+            [other.subObjects sortUsingComparator:compareBlock];
             [self.table reloadData];
         }
             break;

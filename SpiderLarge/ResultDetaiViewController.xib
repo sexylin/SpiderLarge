@@ -96,17 +96,12 @@
                         </button>
                         <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0r-Hx-CFX">
                             <rect key="frame" x="612" y="6" width="100" height="18"/>
-                            <popUpButtonCell key="cell" type="bevel" title="Sort by type" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="cGU-oR-QuB" id="Zfs-kd-u4l">
+                            <popUpButtonCell key="cell" type="bevel" title="Sort by size" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" selectedItem="VD8-Re-XnG" id="Zfs-kd-u4l">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" size="11" name=".HelveticaNeueDeskInterface-Regular"/>
                                 <menu key="menu" id="h1Z-RO-iHK">
                                     <items>
-                                        <menuItem title="Sort by type" state="on" id="cGU-oR-QuB">
-                                            <connections>
-                                                <action selector="clickSort:" target="-2" id="1SE-yV-GLP"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Sort by size" id="VD8-Re-XnG">
+                                        <menuItem title="Sort by size" state="on" id="VD8-Re-XnG">
                                             <connections>
                                                 <action selector="clickSort:" target="-2" id="Nu6-WG-wzr"/>
                                             </connections>

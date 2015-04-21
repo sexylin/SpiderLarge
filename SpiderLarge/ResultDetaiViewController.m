@@ -58,7 +58,6 @@
 }
 
 - (IBAction)clickDeleteButton:(id)sender{
-    
     NSMutableArray *removes = [NSMutableArray array];
     NSFileManager *fm = [NSFileManager defaultManager];
     for(ScanObj *obj in _selectArr){
@@ -425,6 +424,21 @@
     NSTextField *field = [[NSTextField alloc]initWithFrame:CGRectMake(0, 0, 120, 19)];
     field.placeholderString = @"Add a new suffix here";
     return field;
+}
+
+- (void)ruleEditorRowsDidChange:(NSNotification *)notification{
+    NSInteger rows = [self.ruleEditor numberOfRows];
+    if(rows == 1)return;
+    
+    NSArray *values = [self.ruleEditor displayValuesForRow:rows-1];
+    for(id obj in values){
+        if([[obj class]isSubclassOfClass:[NSTextField class]]){
+            NSTextField *txt = (NSTextField *)obj;
+            if([txt.stringValue length] == 0){
+                [self.ruleEditor removeRowAtIndex:rows-1];
+            }
+        }
+    }
 }
 
 @end

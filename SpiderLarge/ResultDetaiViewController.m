@@ -32,6 +32,7 @@
     _nodes = [[NSMutableArray alloc]init];
     _rulesArr = [[NSMutableArray alloc]init];
     [_rulesArr addObject:@"suffix"];
+    [_rulesArr addObject:@"preffix"];
     
     self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
     self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
@@ -74,8 +75,8 @@
 
 - (IBAction)customYourTypes:(id)sender{
     [self.view.window beginSheet:self.ruleWindow completionHandler:^(NSModalResponse returnCode) {
-        [self.ruleEditor addRow:self];
     }];
+     [self.ruleEditor addRow:self];
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo{
@@ -391,8 +392,7 @@
 }
 //
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item{
-    if(item) return 36;
-    return 28;
+    return 45;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item{
@@ -421,25 +421,26 @@
 }
 
 - (id)ruleEditor:(NSRuleEditor *)editor displayValueForCriterion:(id)criterion inRow:(NSInteger)row{
-    NSTextField *field = [[NSTextField alloc]initWithFrame:CGRectMake(0, 0, 120, 19)];
-    field.placeholderString = @"Add a new suffix here";
-    return field;
+//    NSTextField *field = [[NSTextField alloc]initWithFrame:CGRectMake(0, 0, 120, 19)];
+//    field.placeholderString = @"Add a new suffix here";
+//    return field;
+    return [_rulesArr objectAtIndex:index];
 }
 
-- (void)ruleEditorRowsDidChange:(NSNotification *)notification{
-    NSInteger rows = [self.ruleEditor numberOfRows];
-    if(rows == 1)return;
-    
-    NSArray *values = [self.ruleEditor displayValuesForRow:rows-1];
-    for(id obj in values){
-        if([[obj class]isSubclassOfClass:[NSTextField class]]){
-            NSTextField *txt = (NSTextField *)obj;
-            if([txt.stringValue length] == 0){
-                [self.ruleEditor removeRowAtIndex:rows-1];
-            }
-        }
-    }
-}
+//- (void)ruleEditorRowsDidChange:(NSNotification *)notification{
+//    NSInteger rows = [self.ruleEditor numberOfRows];
+//    if(rows == 1)return;
+//    
+//    NSArray *values = [self.ruleEditor displayValuesForRow:rows-1];
+//    for(id obj in values){
+//        if([[obj class]isSubclassOfClass:[NSTextField class]]){
+//            NSTextField *txt = (NSTextField *)obj;
+//            if([txt.stringValue length] == 0){
+//                if(rows>=1)[self.ruleEditor removeRowAtIndex:rows-1];
+//            }
+//        }
+//    }
+//}
 
 @end
 

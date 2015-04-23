@@ -212,8 +212,7 @@
                             <rect key="frame" x="1" y="1" width="238" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <ruleEditor nestingMode="list" canRemoveAllRows="YES" rowHeight="25" id="GMr-6E-y98">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
+                                <ruleEditor nestingMode="list" rowHeight="25" id="GMr-6E-y98">
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <connections>
                                         <outlet property="delegate" destination="-2" id="u8r-af-Vhk"/>

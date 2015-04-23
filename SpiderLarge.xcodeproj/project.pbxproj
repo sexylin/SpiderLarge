@@ -25,6 +25,7 @@
 		F8E8D2061AC2A3A400259CDC /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E8D2041AC2A3A400259CDC /* HomeViewController.xib */; };
 		F8E9B6FC1ACBC79D008368B0 /* button_cl.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9B6FB1ACBC79D008368B0 /* button_cl.png */; };
 		F8E9B7001ACBE8B2008368B0 /* UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9B6FF1ACBE8B2008368B0 /* UIView.m */; };
+		F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EB86D61AE89AAC0002EC13 /* Criterion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		F8E9B6FD1ACBCDFF008368B0 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../Resource/common.h; sourceTree = "<group>"; };
 		F8E9B6FE1ACBE8B2008368B0 /* UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIView.h; path = SpiderLarge/UIView.h; sourceTree = SOURCE_ROOT; };
 		F8E9B6FF1ACBE8B2008368B0 /* UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIView.m; path = SpiderLarge/UIView.m; sourceTree = SOURCE_ROOT; };
+		F8EB86D51AE89AAC0002EC13 /* Criterion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criterion.h; sourceTree = "<group>"; };
+		F8EB86D61AE89AAC0002EC13 /* Criterion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criterion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 				F8E9B6FF1ACBE8B2008368B0 /* UIView.m */,
 				F8E8A5691ADFA14700646C10 /* CommonFunction.h */,
 				F8E8A56A1ADFA14700646C10 /* CommonFunction.m */,
+				F8EB86D51AE89AAC0002EC13 /* Criterion.h */,
+				F8EB86D61AE89AAC0002EC13 /* Criterion.m */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 				F8E8A56B1ADFA14700646C10 /* CommonFunction.m in Sources */,
 				F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */,
 				F8E840E21AC15680001CCB5B /* FileScanner.m in Sources */,
+				F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */,
 				F8E8D2051AC2A3A400259CDC /* HomeViewController.m in Sources */,
 				F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */,
 			);

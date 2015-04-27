@@ -17,8 +17,6 @@
     NSMutableDictionary *_cellQueue;
     NSMutableArray *_selectArr;
     NSMutableArray *_nodes;
-    
-    NSMutableArray *_rulesArr;
 }
 
 @end
@@ -30,9 +28,6 @@
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
     _nodes = [[NSMutableArray alloc]init];
-    _rulesArr = [[NSMutableArray alloc]init];
-    [_rulesArr addObject:@"suffix"];
-    [_rulesArr addObject:@"preffix"];
     
     self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
     self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
@@ -73,10 +68,19 @@
     [self sortFiles:_sortType];
 }
 
-- (IBAction)customYourTypes:(id)sender{
+- (IBAction)clickPurchase:(NSButton *)sender{
     [self.view.window beginSheet:self.ruleWindow completionHandler:^(NSModalResponse returnCode) {
     }];
-     [self.ruleEditor addRow:self];
+}
+
+- (IBAction)purchaseItem:(NSButton *)sender{
+    if([SKPaymentQueue canMakePayments]){
+        if(sender.tag == 1001){
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID1]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }
+    }
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo{
@@ -409,38 +413,61 @@
     return YES;
 }
 
-
-#pragma mark - rules delegate
-- (NSInteger)ruleEditor:(NSRuleEditor *)editor numberOfChildrenForCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType{
-    if(criterion == nil)return [_rulesArr count];
-    return 0;
+#pragma mark - purchase
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+    [[SKPaymentQueue defaultQueue] addTransactionObserver: self];
+    
+    for (SKProduct *product in response.products)
+    {
+        SKPayment *payment = [SKPayment paymentWithProduct: product];
+        [[SKPaymentQueue defaultQueue] addPayment: payment];
+    }
 }
 
-- (id)ruleEditor:(NSRuleEditor *)editor child:(NSInteger)index forCriterion:(id)criterion withRowType:(NSRuleEditorRowType)rowType{
-    return [_rulesArr objectAtIndex:index];
+- (void)paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentQueue *)queue
+{
+    NSLog(@"所有购买数据完成\n");
 }
 
-- (id)ruleEditor:(NSRuleEditor *)editor displayValueForCriterion:(id)criterion inRow:(NSInteger)row{
-//    NSTextField *field = [[NSTextField alloc]initWithFrame:CGRectMake(0, 0, 120, 19)];
-//    field.placeholderString = @"Add a new suffix here";
-//    return field;
-    return [_rulesArr objectAtIndex:index];
+
+-(void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+    NSLog(@"%@\n",error.description);
 }
 
-//- (void)ruleEditorRowsDidChange:(NSNotification *)notification{
-//    NSInteger rows = [self.ruleEditor numberOfRows];
-//    if(rows == 1)return;
-//    
-//    NSArray *values = [self.ruleEditor displayValuesForRow:rows-1];
-//    for(id obj in values){
-//        if([[obj class]isSubclassOfClass:[NSTextField class]]){
-//            NSTextField *txt = (NSTextField *)obj;
-//            if([txt.stringValue length] == 0){
-//                if(rows>=1)[self.ruleEditor removeRowAtIndex:rows-1];
-//            }
-//        }
-//    }
-//}
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+    for (SKPaymentTransaction *transaction in transactions)
+    {
+        if (transaction.transactionState == SKPaymentTransactionStatePurchasing)
+        {
+            NSLog(@"正在处理...\n");
+        }
+        else if (transaction.transactionState == SKPaymentTransactionStatePurchased)
+        {
+           NSLog(@"购买成功...\n");
+        }
+        else if (transaction.transactionState == SKPaymentTransactionStateFailed)
+        {
+           NSLog(@"购买失败...\n");
+        }
+        else if(transaction.transactionState == SKPaymentTransactionStateRestored)
+        {
+            NSLog(@"恢复上次购买...\n");
+        }
+        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
+            NSLog(@"等待购买...\n");
+        }
+    }
+}
+
+
+- (void)paymentQueue: (SKPaymentQueue *)queue removedTransactions: (NSArray *)transactions
+{
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver: self];
+}
 
 @end
 
@@ -584,7 +611,7 @@
     }
 }
 
-- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
+/*- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
     return 1;
 }
 
@@ -600,7 +627,7 @@
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel{
     return YES;
-}
+}*/
 
 @end
 

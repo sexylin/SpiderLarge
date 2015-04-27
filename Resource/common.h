@@ -12,4 +12,8 @@
 #import "AppDelegate.h"
 
 #define appDelegate__ ((AppDelegate *)[NSApplication sharedApplication].delegate)
+#define kProductID1 @"spider_large_file.product.full"
+#define kProductID2 @"spider_large_file.product.unlock1"
+#define kProductID3 @"spider_large_file.product.unlock2"
+#define kProductID4 @"spider_large_file.product.unlock3"
 #endif

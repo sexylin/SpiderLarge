@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "UIView.h"
 #import <Quartz/Quartz.h>
+#import <StoreKit/StoreKit.h>
 
 enum{
     SortBySize = 0,
@@ -25,13 +26,13 @@ typedef NSInteger SortType;
 
 @end
 
-@interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate,NSRuleEditorDelegate>{
+@interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver>{
     SortType _sortType;
 }
 @property (assign)IBOutlet NSOutlineView *table;
-@property (assign)IBOutlet NSRuleEditor  *ruleEditor;
 @property (assign)IBOutlet UIView *toolBar;
 @property (assign)IBOutlet NSWindow *ruleWindow;
+@property (assign)IBOutlet NSButton *purchaseButton;
 
 @end
 

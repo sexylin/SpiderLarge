@@ -10,7 +10,10 @@
 		F80FC3361AC5243200B21126 /* DragView.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3351AC5243200B21126 /* DragView.m */; };
 		F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3381AC5426A00B21126 /* ResultDetaiViewController.m */; };
 		F80FC33B1AC5426A00B21126 /* ResultDetaiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */; };
+		F8BC61321AEE3620009BD309 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BC61311AEE3620009BD309 /* StoreKit.framework */; };
 		F8DE64301ADCEC7800B4A66D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DE642F1ADCEC7800B4A66D /* Quartz.framework */; };
+		F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */; };
+		F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11741AEDF33E00521661 /* NSData+Base64.m */; };
 		F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */; };
 		F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C31AC13F2C001CCB5B /* AppDelegate.m */; };
 		F8E840C61AC13F2C001CCB5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C51AC13F2C001CCB5B /* main.m */; };
@@ -44,7 +47,12 @@
 		F80FC3371AC5426A00B21126 /* ResultDetaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDetaiViewController.h; path = SpiderLarge/ResultDetaiViewController.h; sourceTree = "<group>"; };
 		F80FC3381AC5426A00B21126 /* ResultDetaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResultDetaiViewController.m; path = SpiderLarge/ResultDetaiViewController.m; sourceTree = "<group>"; };
 		F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultDetaiViewController.xib; path = SpiderLarge/ResultDetaiViewController.xib; sourceTree = "<group>"; };
+		F8BC61311AEE3620009BD309 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F8DE642F1ADCEC7800B4A66D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		F8DF11711AEDF33E00521661 /* FBEncryptorAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEncryptorAES.h; sourceTree = "<group>"; };
+		F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
+		F8DF11731AEDF33E00521661 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		F8DF11741AEDF33E00521661 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		F8E27D7E1ACAA61700E09026 /* SXTitleBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SXTitleBar.h; path = SpiderLarge/SXTitleBar.h; sourceTree = "<group>"; };
 		F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXTitleBar.m; path = SpiderLarge/SXTitleBar.m; sourceTree = "<group>"; };
 		F8E840BD1AC13F2C001CCB5B /* SpiderLarge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderLarge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8DE64301ADCEC7800B4A66D /* Quartz.framework in Frameworks */,
+				F8BC61321AEE3620009BD309 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +104,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8DF11701AEDF33E00521661 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				F8DF11711AEDF33E00521661 /* FBEncryptorAES.h */,
+				F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */,
+				F8DF11731AEDF33E00521661 /* NSData+Base64.h */,
+				F8DF11741AEDF33E00521661 /* NSData+Base64.m */,
+			);
+			path = Encryption;
+			sourceTree = "<group>";
+		};
 		F8E840B41AC13F2C001CCB5B = {
 			isa = PBXGroup;
 			children = (
+				F8BC61311AEE3620009BD309 /* StoreKit.framework */,
 				F8DE642F1ADCEC7800B4A66D /* Quartz.framework */,
 				F8E9B6FA1ACBC79D008368B0 /* Resource */,
 				F8E27D7E1ACAA61700E09026 /* SXTitleBar.h */,
@@ -125,6 +146,7 @@
 		F8E840BF1AC13F2C001CCB5B /* SpiderLarge */ = {
 			isa = PBXGroup;
 			children = (
+				F8DF11701AEDF33E00521661 /* Encryption */,
 				F8E840C21AC13F2C001CCB5B /* AppDelegate.h */,
 				F8E840C31AC13F2C001CCB5B /* AppDelegate.m */,
 				F8E840C71AC13F2C001CCB5B /* Images.xcassets */,
@@ -233,6 +255,12 @@
 				TargetAttributes = {
 					F8E840BC1AC13F2C001CCB5B = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = J59ZUY3B3P;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					F8E840CF1AC13F2C001CCB5B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -289,10 +317,12 @@
 				F8E840E51AC15880001CCB5B /* ScanObj.m in Sources */,
 				F8E840C61AC13F2C001CCB5B /* main.m in Sources */,
 				F8E8D2011AC297B300259CDC /* SLAlertView.m in Sources */,
+				F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */,
 				F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */,
 				F8E9B7001ACBE8B2008368B0 /* UIView.m in Sources */,
 				F80FC3361AC5243200B21126 /* DragView.m in Sources */,
 				F8E8A56B1ADFA14700646C10 /* CommonFunction.m in Sources */,
+				F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */,
 				F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */,
 				F8E840E21AC15680001CCB5B /* FileScanner.m in Sources */,
 				F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */,
@@ -348,7 +378,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -368,6 +399,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -389,7 +421,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -403,6 +436,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -411,6 +445,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SpiderLarge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -419,6 +456,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
 			};
 			name = Debug;
 		};
@@ -426,6 +464,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SpiderLarge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -434,6 +475,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
 			};
 			name = Release;
 		};

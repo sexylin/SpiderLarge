@@ -62,4 +62,25 @@
                    digest[14], digest[15]];
     return s;
 }
+
++ (BOOL)clearModule:(kModuleType)type{
+    NSString *str = [NSString stringWithFormat:@"%ld+clear",type];
+    NSString *encry = [FBEncryptorAES encryptBase64String:str keyString:AUTH_KEY separateLines:NO];
+    NSString *obj = [[NSUserDefaults standardUserDefaults]objectForKey:encry];
+    if(obj){
+        NSString *decry = [FBEncryptorAES decryptBase64String:obj keyString:AUTH_KEY];
+        if([decry isEqualToString:[NSString stringWithFormat:@"YES+clear+%ld",type]]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
++ (void)unlockModule:(kModuleType)type{
+    NSString *value = [NSString stringWithFormat:@"YES+clear+%ld",type];
+    NSString *encryValue = [FBEncryptorAES encryptBase64String:value keyString:AUTH_KEY separateLines:NO];
+    NSString *key = [NSString stringWithFormat:@"%ld+clear",type];
+    NSString *encryKey = [FBEncryptorAES encryptBase64String:key keyString:AUTH_KEY separateLines:NO];
+    [[NSUserDefaults standardUserDefaults]setObject:encryValue forKey:encryKey];
+}
 @end

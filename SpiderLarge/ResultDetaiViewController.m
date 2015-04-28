@@ -73,6 +73,10 @@
     }];
 }
 
+- (IBAction)endSheet:(id)sender{
+    [self.view.window endSheet:self.ruleWindow];
+}
+
 - (IBAction)purchaseItem:(NSButton *)sender{
     if([SKPaymentQueue canMakePayments]){
         if(sender.tag == 1001){

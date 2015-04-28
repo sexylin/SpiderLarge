@@ -8,8 +8,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultDetaiViewController">
             <connections>
+                <outlet property="duplicateButton" destination="qKv-7s-LVJ" id="67C-ar-kqz"/>
+                <outlet property="moveButton" destination="ifq-be-WCN" id="LM6-Ar-lKt"/>
                 <outlet property="purchaseButton" destination="rKY-eo-uPm" id="VHS-q0-gVQ"/>
                 <outlet property="ruleWindow" destination="HFq-QG-fFx" id="4kY-vf-dss"/>
+                <outlet property="searchField" destination="5wi-wM-fMw" id="uuK-hZ-6H6"/>
                 <outlet property="table" destination="2ZG-HX-MK3" id="84t-Id-Tmk"/>
                 <outlet property="toolBar" destination="ZS7-fp-N6o" id="QTJ-Po-zH1"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

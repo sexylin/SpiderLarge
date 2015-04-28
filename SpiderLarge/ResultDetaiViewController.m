@@ -325,6 +325,34 @@
     [self.table reloadData];
 }
 
+- (kModuleType)moduleTypeForProductID:(NSString *)prdID{
+    kModuleType type;
+    if([prdID isEqualToString:kProductID1])
+        type = ModuleTypeFull;
+    else if ([prdID isEqualToString:kProductID2])
+        type = ModuleTypeMove;
+    else if ([prdID isEqualToString:kProductID3])
+        type = ModuleTypeSearch;
+    else if([prdID isEqualToString:kProductID4])
+        type = ModuleTypeDuplicates;
+    return type;
+}
+
+- (void)unlockModule:(kModuleType)type{
+    if(type == ModuleTypeFull){
+        [self.purchaseButton setHidden:YES];
+        [self.searchField setHidden:NO];
+        [self.moveButton setHidden:NO];
+        [self.duplicateButton setHidden:NO];
+    }else if (type == ModuleTypeMove){
+        [self.moveButton setHidden:NO];
+    }else if (type == ModuleTypeSearch){
+        [self.searchField setHidden:NO];
+    }else if (type == ModuleTypeDuplicates){
+        [self.duplicateButton setHidden:NO];
+    }
+}
+
 #pragma mark - TableView Delegate
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item{
     if(item){
@@ -441,6 +469,8 @@
 {
     for (SKPaymentTransaction *transaction in transactions)
     {
+        NSString *productID = transaction.payment.productIdentifier;
+        
         if (transaction.transactionState == SKPaymentTransactionStatePurchasing)
         {
             NSLog(@"正在处理...\n");
@@ -448,6 +478,9 @@
         else if (transaction.transactionState == SKPaymentTransactionStatePurchased)
         {
            NSLog(@"购买成功...\n");
+            kModuleType clearType = [self moduleTypeForProductID:productID];
+            [CommonFunction clearModule:clearType];
+            [self unlockModule:clearType];
         }
         else if (transaction.transactionState == SKPaymentTransactionStateFailed)
         {

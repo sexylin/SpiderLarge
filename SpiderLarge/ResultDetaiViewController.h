@@ -33,6 +33,9 @@ typedef NSInteger SortType;
 @property (assign)IBOutlet UIView *toolBar;
 @property (assign)IBOutlet NSWindow *ruleWindow;
 @property (assign)IBOutlet NSButton *purchaseButton;
+@property (assign)IBOutlet NSButton *moveButton;
+@property (assign)IBOutlet NSButton *duplicateButton;
+@property (assign)IBOutlet NSSearchField *searchField;
 
 @end
 

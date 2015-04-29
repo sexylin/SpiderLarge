@@ -8,8 +8,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultDetaiViewController">
             <connections>
+                <outlet property="coverWindow" destination="QxT-QP-LoF" id="d8c-rL-h5z"/>
                 <outlet property="duplicateButton" destination="qKv-7s-LVJ" id="67C-ar-kqz"/>
                 <outlet property="moveButton" destination="ifq-be-WCN" id="LM6-Ar-lKt"/>
+                <outlet property="progressingLabel" destination="k9s-ab-rkC" id="FWf-xb-y0h"/>
                 <outlet property="purchaseButton" destination="rKY-eo-uPm" id="VHS-q0-gVQ"/>
                 <outlet property="ruleWindow" destination="HFq-QG-fFx" id="4kY-vf-dss"/>
                 <outlet property="searchField" destination="5wi-wM-fMw" id="uuK-hZ-6H6"/>
@@ -187,14 +189,14 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="HFq-QG-fFx">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="207" width="480" height="270"/>
+            <rect key="contentRect" x="196" y="207" width="480" height="360"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="xhK-Hh-Neb">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBM-Ya-XhS">
-                        <rect key="frame" x="18" y="223" width="453" height="34"/>
+                        <rect key="frame" x="18" y="313" width="453" height="34"/>
                         <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Purchase full version for Spider Large File ,you can enjoy three more functions:" id="b1s-Wo-odu">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -202,7 +204,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CzI-Kr-Xd5">
-                        <rect key="frame" x="18" y="192" width="442" height="23"/>
+                        <rect key="frame" x="18" y="282" width="442" height="23"/>
                         <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1.Move large fles to your specifited directory to manage your file system." id="fX8-ef-zKm">
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -210,7 +212,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RH2-VL-49e">
-                        <rect key="frame" x="19" y="168" width="440" height="23"/>
+                        <rect key="frame" x="19" y="258" width="440" height="23"/>
                         <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2.Search your custom suffix of file to help you find specifited files." id="Wmb-3a-DDR">
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -218,7 +220,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABd-lj-gzJ">
-                        <rect key="frame" x="20" y="145" width="443" height="23"/>
+                        <rect key="frame" x="20" y="235" width="443" height="23"/>
                         <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="3.Find duplicates files in all large files to help you delete these useless fastly." id="uVd-yi-rWC">
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -226,8 +228,8 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" tag="1001" translatesAutoresizingMaskIntoConstraints="NO" id="yx9-mI-Vgh">
-                        <rect key="frame" x="22" y="119" width="122" height="17"/>
-                        <buttonCell key="cell" type="roundRect" title="purchase full version" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oOW-9C-Jtc">
+                        <rect key="frame" x="22" y="209" width="131" height="17"/>
+                        <buttonCell key="cell" type="roundRect" title="Purchase Full Version" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oOW-9C-Jtc">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
                         </buttonCell>
@@ -236,15 +238,15 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCR-u1-ucF">
-                        <rect key="frame" x="150" y="119" width="84" height="23"/>
+                        <rect key="frame" x="161" y="209" width="84" height="23"/>
                         <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="for $9.99!" id="RnH-Zf-uom">
                             <font key="font" size="15" name="HelveticaNeue-BoldItalic"/>
-                            <color key="textColor" red="0.98545625474717713" green="0.13192521686907169" blue="0.40601423184076946" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.11714275655461054" green="0.38607644469589258" blue="0.98545625474717713" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jfv-PY-DTy">
-                        <rect key="frame" x="389" y="9" width="72" height="16"/>
+                        <rect key="frame" x="390" y="19" width="72" height="16"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" controlSize="mini" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="N6Y-Sw-7mI">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="miniSystem"/>
@@ -256,6 +258,112 @@ DQ
                             <action selector="endSheet:" target="-2" id="nBL-xS-grL"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8p-nw-BFt">
+                        <rect key="frame" x="22" y="182" width="441" height="21"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only Purchase Move Functions" id="TKO-ao-u1m">
+                            <font key="font" metaFont="cellTitle"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGo-NG-KrC">
+                        <rect key="frame" x="230" y="211" width="101" height="16"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=", or you can:" id="2sN-WB-jgu">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1002" translatesAutoresizingMaskIntoConstraints="NO" id="VYQ-Tl-KZc">
+                        <rect key="frame" x="22" y="165" width="131" height="17"/>
+                        <buttonCell key="cell" type="roundRect" title="Purchase Move Function" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xLx-3S-pkK">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="miniSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="purchaseItem:" target="-2" id="Ljl-mT-Deq"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1003" translatesAutoresizingMaskIntoConstraints="NO" id="I33-HX-yQX">
+                        <rect key="frame" x="22" y="122" width="131" height="17"/>
+                        <buttonCell key="cell" type="roundRect" title="Purchase Search Function" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tg1-hM-i0n">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="miniSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="purchaseItem:" target="-2" id="bla-m4-Pb6"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvY-d5-6sV">
+                        <rect key="frame" x="161" y="164" width="84" height="23"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="for $3.99!" id="UK2-XL-xdT">
+                            <font key="font" size="15" name="HelveticaNeue-BoldItalic"/>
+                            <color key="textColor" red="0.98545625469999998" green="0.1319252169" blue="0.40601423180000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICS-uS-TP6">
+                        <rect key="frame" x="161" y="122" width="84" height="23"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="for $3.99!" id="Yef-ea-RPr">
+                            <font key="font" size="15" name="HelveticaNeue-BoldItalic"/>
+                            <color key="textColor" red="0.98545625469999998" green="0.1319252169" blue="0.40601423180000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwY-rp-ejK">
+                        <rect key="frame" x="22" y="140" width="441" height="21"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only Purchase Search Functions" id="G9M-Ww-GC4">
+                            <font key="font" metaFont="titleBar" size="12"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7mg-RF-5FJ">
+                        <rect key="frame" x="22" y="95" width="441" height="21"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Only Purchase Duplicate Files Functions" id="G93-9D-pT8">
+                            <font key="font" metaFont="titleBar" size="12"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1004" translatesAutoresizingMaskIntoConstraints="NO" id="HSp-2C-Du8">
+                        <rect key="frame" x="24" y="76" width="147" height="17"/>
+                        <buttonCell key="cell" type="roundRect" title="Purchase Duplicates Function" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lzz-b1-xr5">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="miniSystem"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="purchaseItem:" target="-2" id="Tat-0w-ynk"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9L-sG-Tgd">
+                        <rect key="frame" x="178" y="75" width="84" height="23"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="for $3.99!" id="NZ0-FG-l77">
+                            <font key="font" size="15" name="HelveticaNeue-BoldItalic"/>
+                            <color key="textColor" red="0.98545625469999998" green="0.1319252169" blue="0.40601423180000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+        </window>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QxT-QP-LoF">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="207" width="720" height="500"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="S9C-8k-8mQ">
+                <rect key="frame" x="0.0" y="0.0" width="720" height="500"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k9s-ab-rkC">
+                        <rect key="frame" x="210" y="225" width="300" height="50"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Waiting..." id="OhX-dK-zvh">
+                            <font key="font" metaFont="system" size="35"/>
+                            <color key="textColor" red="0.71712962962962967" green="0.83394097222222219" blue="0.96657986111111116" alpha="0.63" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
         </window>

@@ -17,6 +17,7 @@
     NSMutableDictionary *_cellQueue;
     NSMutableArray *_selectArr;
     NSMutableArray *_nodes;
+    NSString *_purchaseID;
 }
 
 @end
@@ -32,6 +33,21 @@
     self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
     self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
     scanner = [FileScanner shareScanner];
+    
+    if([CommonFunction clearModule:ModuleTypeFull]){
+        [self unlockModule:ModuleTypeFull];
+    }else{
+        if([CommonFunction clearModule:ModuleTypeMove]){
+            [self unlockModule:ModuleTypeMove];
+        }
+        if([CommonFunction clearModule:ModuleTypeSearch]){
+            [self unlockModule:ModuleTypeSearch];
+        }
+        if([CommonFunction clearModule:ModuleTypeDuplicates]){
+            [self unlockModule:ModuleTypeDuplicates];
+        }
+    }
+    
     // Do view setup here.
 }
 
@@ -77,14 +93,41 @@
     [self.view.window endSheet:self.ruleWindow];
 }
 
+- (void)showCover{
+    self.progressingLabel.stringValue = @"";
+    self.coverWindow.backgroundColor = [NSColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [self.ruleWindow beginSheet:self.coverWindow completionHandler:nil];
+}
+
+- (void)dismissCover{
+    [self.ruleWindow endSheet:self.coverWindow];
+}
+
 - (IBAction)purchaseItem:(NSButton *)sender{
     if([SKPaymentQueue canMakePayments]){
         if(sender.tag == 1001){
+            _purchaseID = kProductID1;
             SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID1]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if(sender.tag == 1002){
+            _purchaseID = kProductID2;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID2]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if (sender.tag == 1003){
+            _purchaseID = kProductID3;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID3]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if (sender.tag == 1004){
+            _purchaseID = kProductID4;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID4]];
             prdReq.delegate = self;
             [prdReq start];
         }
     }
+    [self showCover];
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo{
@@ -447,6 +490,8 @@
 
 #pragma mark - purchase
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+    if([response.invalidProductIdentifiers count] > 0) return;
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver: self];
     
     for (SKProduct *product in response.products)
@@ -458,7 +503,7 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentQueue *)queue
 {
-    NSLog(@"所有购买数据完成\n");
+    NSLog(@"恢复上次购买...\n");
 }
 
 
@@ -474,20 +519,29 @@
     for (SKPaymentTransaction *transaction in transactions)
     {
         NSString *productID = transaction.payment.productIdentifier;
+        NSLog(@"productID:%@\n",productID);
         
         if (transaction.transactionState == SKPaymentTransactionStatePurchasing)
         {
             NSLog(@"正在处理...\n");
+            self.progressingLabel.stringValue = @"Transaction start...";
         }
         else if (transaction.transactionState == SKPaymentTransactionStatePurchased)
         {
            NSLog(@"购买成功...\n");
-            kModuleType clearType = [self moduleTypeForProductID:productID];
-            [CommonFunction clearModule:clearType];
-            [self unlockModule:clearType];
+            if([_purchaseID isEqualToString:productID]){
+                self.progressingLabel.stringValue = @"Pay success...";
+                [self dismissCover];
+                
+                kModuleType clearType = [self moduleTypeForProductID:productID];
+                [CommonFunction clearModule:clearType];
+                [self unlockModule:clearType];
+            }
         }
         else if (transaction.transactionState == SKPaymentTransactionStateFailed)
         {
+            self.progressingLabel.stringValue = @"Payment failed...";
+            [self dismissCover];
            NSLog(@"购买失败...\n");
         }
         else if(transaction.transactionState == SKPaymentTransactionStateRestored)
@@ -495,6 +549,7 @@
             NSLog(@"恢复上次购买...\n");
         }
         else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
+            self.progressingLabel.stringValue = @"Waiting...";
             NSLog(@"等待购买...\n");
         }
     }
@@ -503,6 +558,7 @@
 
 - (void)paymentQueue: (SKPaymentQueue *)queue removedTransactions: (NSArray *)transactions
 {
+    NSLog(@"remove transition\n");
     [[SKPaymentQueue defaultQueue] removeTransactionObserver: self];
 }
 

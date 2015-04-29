@@ -36,6 +36,8 @@ typedef NSInteger SortType;
 @property (assign)IBOutlet NSButton *moveButton;
 @property (assign)IBOutlet NSButton *duplicateButton;
 @property (assign)IBOutlet NSSearchField *searchField;
+@property (assign)IBOutlet NSWindow *coverWindow;
+@property (assign)IBOutlet NSTextField *progressingLabel;
 
 @end
 

@@ -18,6 +18,7 @@
     NSMutableArray *_selectArr;
     NSMutableArray *_nodes;
     NSString *_purchaseID;
+    NSString *_searchString;
 }
 
 @end
@@ -26,9 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _sortType = SortBySize;
+    
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
     _nodes = [[NSMutableArray alloc]init];
+    _searchString = nil;
     
     self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
     self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
@@ -48,11 +52,13 @@
         }
     }
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:NSControlTextDidChangeNotification object:nil];
+    
     // Do view setup here.
 }
 
 - (void)reloadTable{
-    [self sortFiles:SortBySize];
+    [self sortFiles:_sortType];
     [self.table reloadData];
 }
 
@@ -91,6 +97,21 @@
 
 - (IBAction)endSheet:(id)sender{
     [self.view.window endSheet:self.ruleWindow];
+}
+
+- (IBAction)findDuplicates:(id)sender{
+    self.progressingLabel.stringValue = @"Start Check Duplicate File ...";
+    self.coverWindow.backgroundColor = [NSColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [self.ruleWindow beginSheet:self.coverWindow completionHandler:nil];
+}
+
+- (void)checkDuplicates{
+    NSMutableArray *md5s = [NSMutableArray array];
+    for(int i=0;i<[scanner.scanResults count];i++){
+        ScanObj *file  = [scanner.scanResults objectAtIndex:i];
+        NSString *fileMd5 = [CommonFunction fileMD5:file.filePath];
+        [md5s addObject:fileMd5];
+    }
 }
 
 - (void)showCover{
@@ -224,7 +245,19 @@
     ScanObj *other = [[[ScanObj alloc]init]autorelease];
     other.filePath = @"Others";
     
-    for(ScanObj *obj in scanner.scanResults){
+    NSMutableArray *copyArr = [NSMutableArray array];
+    if(_searchString){
+        for(ScanObj *obj in scanner.scanResults){
+            NSString *suffixStr = [obj.filePath pathExtension];
+            if([suffixStr rangeOfString:_searchString].location != NSNotFound){
+                [copyArr addObject:obj];
+            }
+        }
+    }else{
+        [copyArr addObjectsFromArray:scanner.scanResults];
+    }
+    
+    for(ScanObj *obj in copyArr){
         NSString *copyName = [obj.name copy];
         obj.name = [obj.name lowercaseString];
         
@@ -311,6 +344,10 @@
             break;
         default:
             break;
+    }
+    
+    if([_nodes count] > 0){
+        [self.table expandItem:[_nodes objectAtIndex:0]];
     }
 }
 
@@ -400,6 +437,26 @@
     }
 }
 
+- (void)textDidChange:(NSNotification *)notification{
+    NSTextField *txt = notification.object;
+    if([[txt class]isSubclassOfClass:[NSSearchField class]]){
+        NSString *string = txt.stringValue;
+        _searchString = [string copy];
+        
+        if([_searchString length] == 0) _searchString = nil;
+        
+        [self sortFiles:_sortType];
+        
+        if(_searchString){
+            for(ScanObj *node in _nodes){
+                node.isExpand = YES;
+                
+                [self.table expandItem:node];
+            }
+        }
+    }
+}
+
 #pragma mark - TableView Delegate
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item{
     if(item){
@@ -485,7 +542,8 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item{
-    return YES;
+    if([[item subObjects]count] > 0) return YES;
+    return NO;
 }
 
 #pragma mark - purchase

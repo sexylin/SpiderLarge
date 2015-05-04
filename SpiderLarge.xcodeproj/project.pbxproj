@@ -15,6 +15,8 @@
 		F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */; };
 		F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11741AEDF33E00521661 /* NSData+Base64.m */; };
 		F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */; };
+		F8E395861AF7697D007B089D /* DuplicatesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E395841AF7697D007B089D /* DuplicatesWindowController.m */; };
+		F8E395871AF7697D007B089D /* DuplicatesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */; };
 		F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C31AC13F2C001CCB5B /* AppDelegate.m */; };
 		F8E840C61AC13F2C001CCB5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C51AC13F2C001CCB5B /* main.m */; };
 		F8E840C81AC13F2C001CCB5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8E840C71AC13F2C001CCB5B /* Images.xcassets */; };
@@ -57,6 +59,9 @@
 		F8DF11741AEDF33E00521661 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		F8E27D7E1ACAA61700E09026 /* SXTitleBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SXTitleBar.h; path = SpiderLarge/SXTitleBar.h; sourceTree = "<group>"; };
 		F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXTitleBar.m; path = SpiderLarge/SXTitleBar.m; sourceTree = "<group>"; };
+		F8E395831AF7697D007B089D /* DuplicatesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DuplicatesWindowController.h; path = SpiderLarge/DuplicatesWindowController.h; sourceTree = "<group>"; };
+		F8E395841AF7697D007B089D /* DuplicatesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DuplicatesWindowController.m; path = SpiderLarge/DuplicatesWindowController.m; sourceTree = "<group>"; };
+		F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuplicatesWindowController.xib; path = SpiderLarge/DuplicatesWindowController.xib; sourceTree = "<group>"; };
 		F8E840BD1AC13F2C001CCB5B /* SpiderLarge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderLarge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8E840C11AC13F2C001CCB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8E840C21AC13F2C001CCB5B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -133,6 +138,9 @@
 				F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */,
 				F80FC3341AC5243200B21126 /* DragView.h */,
 				F80FC3351AC5243200B21126 /* DragView.m */,
+				F8E395831AF7697D007B089D /* DuplicatesWindowController.h */,
+				F8E395841AF7697D007B089D /* DuplicatesWindowController.m */,
+				F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */,
 				F8E840BF1AC13F2C001CCB5B /* SpiderLarge */,
 				F8E840D31AC13F2C001CCB5B /* SpiderLargeTests */,
 				F8E840BE1AC13F2C001CCB5B /* Products */,
@@ -305,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8E840C81AC13F2C001CCB5B /* Images.xcassets in Resources */,
+				F8E395871AF7697D007B089D /* DuplicatesWindowController.xib in Resources */,
 				F8EA57E21AEF5B33000D0966 /* icon@2x.icns in Resources */,
 				F8E9B6FC1ACBC79D008368B0 /* button_cl.png in Resources */,
 				F8E840CB1AC13F2C001CCB5B /* MainMenu.xib in Resources */,
@@ -340,6 +349,7 @@
 				F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */,
 				F8E840E21AC15680001CCB5B /* FileScanner.m in Sources */,
 				F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */,
+				F8E395861AF7697D007B089D /* DuplicatesWindowController.m in Sources */,
 				F8E8D2051AC2A3A400259CDC /* HomeViewController.m in Sources */,
 				F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */,
 			);

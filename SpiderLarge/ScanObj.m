@@ -9,11 +9,16 @@
 #import "ScanObj.h"
 
 @implementation ScanObj
-@synthesize icon,filePath,name,fileSize,modifyDate,createDate,subObjects,isCheck,rowIndex,isSelect;
+@synthesize icon,filePath,name,fileSize,modifyDate,createDate,subObjects,isCheck,rowIndex,isSelect,isExpand;
 - (id)init{
     if(self = [super init]){
         subObjects = [[NSMutableArray alloc]init];
     }
     return self;
+}
+
+- (void)dealloc{
+    if(subObjects)[subObjects release];
+    [super dealloc];
 }
 @end

@@ -34,8 +34,20 @@
     _nodes = [[NSMutableArray alloc]init];
     _searchString = nil;
     
-    self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
-    self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
+    NSBox *horizon = [[NSBox alloc]initWithFrame:CGRectMake(0, 499, CGRectGetWidth(self.view.frame), 1)];
+    horizon.boxType = NSBoxCustom;
+    horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon];
+    
+    NSBox *horizon1 = [[NSBox alloc]initWithFrame:CGRectMake(0, 48, CGRectGetWidth(self.view.frame), 1)];
+    horizon1.boxType = NSBoxCustom;
+    horizon1.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon1];
+    
+    _topBar.backgroundColor = [NSColor colorWithCalibratedRed:78/255.0 green:80/255.0 blue:90/255.0 alpha:1.0f];
+    
+    _toolBar.startColor = [NSColor colorWithCalibratedRed:58/255.0 green:56/255.0 blue:67/255.0 alpha:1.0f];
+    _toolBar.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
     scanner = [FileScanner shareScanner];
     
     if([CommonFunction clearModule:ModuleTypeFull]){
@@ -72,10 +84,16 @@
     open.canChooseDirectories = YES;
     open.canCreateDirectories = YES;
     open.allowsMultipleSelection = NO;
+    open.prompt = @"Move";
     [open beginSheetForDirectory:[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0] file:nil types:nil modalForWindow:self.view.window modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 - (IBAction)clickDeleteButton:(id)sender{
+    if([_selectArr count] == 0){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"No item selected!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please select at least one item to delete."];
+        [alert runModal];
+        return;
+    }
     NSMutableArray *removes = [NSMutableArray array];
     NSFileManager *fm = [NSFileManager defaultManager];
     for(ScanObj *obj in _selectArr){
@@ -97,12 +115,6 @@
 
 - (IBAction)endSheet:(id)sender{
     [self.view.window endSheet:self.ruleWindow];
-}
-
-- (IBAction)findDuplicates:(id)sender{
-    self.progressingLabel.stringValue = @"Start Check Duplicate File ...";
-    self.coverWindow.backgroundColor = [NSColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    [self.ruleWindow beginSheet:self.coverWindow completionHandler:nil];
 }
 
 - (void)checkDuplicates{
@@ -482,18 +494,22 @@
         
         cell.iconView.image = [workspace iconForFile:file_path];
         if(cell.node.isSelect){
-            cell.backgroundColor = [NSColor yellowColor];
+            cell.backgroundColor = [NSColor colorWithCalibratedRed:56/255.0f green:57/255.0f blue:67/255.0f alpha:1.0f];
         }else{
-            cell.backgroundColor = [NSColor colorWithCalibratedRed:244/255.0f green:244/255.0f blue:205/255.0f alpha:1.0f];
+            cell.backgroundColor = [NSColor colorWithCalibratedRed:80/255.0f green:82/255.0f blue:92/255.0f alpha:1.0f];
         }
         
         cell.pathLabel.stringValue = file_path;
         cell.sizeLabel.stringValue = [CommonFunction getSizeDesc:cell.node.fileSize];
-        cell.dateLabel.stringValue = [NSString stringWithFormat:@"%@",obj.modifyDate];
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc]init]autorelease];
+        dateFormat.dateFormat = @"YYYY/MM/dd";
+        
+        cell.dateLabel.stringValue = [NSString stringWithFormat:@"%@",[dateFormat stringFromDate:obj.modifyDate]];
     }else{
         cell.delegate = self;
         cell.node = obj;
         [obj addObserver:cell forKeyPath:@"isCheck" options:NSKeyValueObservingOptionNew context:@"isCheck"];
+        cell.backgroundColor = [NSColor colorWithCalibratedRed:56/255.0f green:57/255.0f blue:67/255.0f alpha:1.0f];
         
         NSString *file_path = obj.filePath;
         cell.pathLabel.stringValue = file_path;
@@ -528,6 +544,8 @@
 }
 //
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item{
+    ScanObj *obj = (ScanObj *)item;
+    if([obj.subObjects count] > 0)return 28;
     return 45;
 }
 
@@ -606,10 +624,10 @@
         {
             NSLog(@"恢复上次购买...\n");
         }
-        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
-            self.progressingLabel.stringValue = @"Waiting...";
-            NSLog(@"等待购买...\n");
-        }
+//        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
+//            self.progressingLabel.stringValue = @"Waiting...";
+//            NSLog(@"等待购买...\n");
+//        }
     }
 }
 
@@ -623,7 +641,7 @@
 @end
 
 @implementation ResultCellView{
-    UIView *sperateLine;
+    NSBox *horizon;
 }
 @synthesize iconView,pathLabel,sizeLabel,dateLabel,checkButton,delegate,node;
 
@@ -651,8 +669,10 @@
         dateLabel.editable = NO;
         dateLabel.bordered = NO;
         
-        sperateLine = [[UIView alloc]init];
-        
+        horizon = [[NSBox alloc]init];
+        horizon.boxType = NSBoxCustom;
+        horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+        [self addSubview:horizon];
         
         [self addSubview:checkButton];
         [self addSubview:iconView];
@@ -681,15 +701,18 @@
     [super viewDidMoveToWindow];
     
     if([self.node.subObjects count] > 0){
-        checkButton.frame = CGRectMake(5, 9, 18, 18);
-        pathLabel.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 500, 20);
+        checkButton.frame = CGRectMake(5, 5, 18, 18);
+        pathLabel.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 500, 25);
     }else{
-        checkButton.frame = CGRectMake(5, 9, 18, 18);
-        iconView.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 26, 26);
-        pathLabel.frame = CGRectMake(CGRectGetMaxX(iconView.frame)+5, 5, 500, 20);
-        sizeLabel.frame = CGRectMake(CGRectGetMaxX(pathLabel.frame)+5, 5, 60, 20);
-        dateLabel.frame = CGRectMake(CGRectGetMaxX(sizeLabel.frame)+5, 5, 80, 20);
+        checkButton.frame = CGRectMake(5, 13.5, 18, 18);
+        iconView.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 9, 26, 26);
+        pathLabel.frame = CGRectMake(CGRectGetMaxX(iconView.frame)+5, 13, 500, 20);
+        sizeLabel.frame = CGRectMake(CGRectGetMaxX(pathLabel.frame)+5, 13, 60, 25);
+        dateLabel.frame = CGRectMake(CGRectGetMaxX(sizeLabel.frame)+5, 13, 80, 25);
     }
+    
+    
+    horizon.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 1);
     
     if(self.node.isCheck) checkButton.state = NSOnState;
     else checkButton.state = NSOffState;

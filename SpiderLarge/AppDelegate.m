@@ -23,8 +23,8 @@
     NSRect boundsRect = [[[_window contentView] superview] bounds];
     SXTitleBar * titleview = [[SXTitleBar alloc] initWithFrame:boundsRect];
     [titleview setAutoresizingMask:(NSViewWidthSizable | NSViewHeightSizable)];
-    titleview.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
-    titleview.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
+    titleview.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:81/255.0 blue:93/255.0f alpha:1.0f];
+    titleview.endColor = [NSColor colorWithCalibratedRed:82/255.0f green:83/255.0f blue:91/255.0f alpha:1.0f];
     titleview.windowTitle = @"Spider Large";
     
     [[[_window contentView] superview] addSubview:titleview positioned:NSWindowBelow relativeTo:[[[[_window contentView] superview] subviews] objectAtIndex:0]];

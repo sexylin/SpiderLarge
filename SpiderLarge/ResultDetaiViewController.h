@@ -28,6 +28,7 @@ typedef NSInteger SortType;
 
 @interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver>{
     SortType _sortType;
+    IBOutlet UIView *_topBar;
 }
 @property (assign)IBOutlet NSOutlineView *table;
 @property (assign)IBOutlet UIView *toolBar;

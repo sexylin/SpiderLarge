@@ -21,7 +21,7 @@
     [super drawRect:dirtyRect];
     
     if(_dragIn){
-        [[NSColor colorWithCalibratedRed:221/255.0f green:221/255.0f blue:221/255.0f alpha:0.7f]set];
+        [[NSColor colorWithCalibratedRed:52/255.0f green:52/255.0f blue:52/255.0f alpha:0.5f]set];
         NSRectFill(dirtyRect);
     }
     

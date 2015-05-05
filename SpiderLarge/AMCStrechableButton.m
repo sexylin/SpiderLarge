@@ -75,7 +75,7 @@
 
 - (void)setStrechableTitle:(NSString *)title image:(NSImage *)image alterImage:(NSImage *)alterimage{
     [self setTitleWithColor:title withTextColor:kTextColor];
-    float width = [self stringWidth:title];
+    float width = CGRectGetWidth(self.frame);
     [[self cell]setImageScaling:NSImageScaleProportionallyUpOrDown];
     self.frame = CGRectMake((int)CGRectGetMinX(self.frame),(int) CGRectGetMinY(self.frame), (int)(width+k_left_cap_width+k_right_cap_width), (int)NSHeight(self.frame));
     if(image != nil){

@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ResultDetaiViewController">
             <connections>
+                <outlet property="_deleteButton" destination="ISg-dy-1oU" id="paG-dL-0m7"/>
                 <outlet property="_topBar" destination="oe3-PI-hc7" id="1pb-Se-FIg"/>
                 <outlet property="coverWindow" destination="QxT-QP-LoF" id="d8c-rL-h5z"/>
                 <outlet property="moveButton" destination="ifq-be-WCN" id="LM6-Ar-lKt"/>
@@ -137,8 +138,8 @@
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZS7-fp-N6o" customClass="UIView">
                     <rect key="frame" x="0.0" y="0.0" width="720" height="48"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-dy-1oU">
-                            <rect key="frame" x="570" y="10" width="108" height="28"/>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ISg-dy-1oU" customClass="AMCStrechableButton">
+                            <rect key="frame" x="592" y="10" width="108" height="28"/>
                             <buttonCell key="cell" type="bevel" title="Delete" bezelStyle="regularSquare" image="button_cl" imagePosition="overlaps" alignment="center" state="on" imageScaling="axesIndependently" inset="2" id="ub5-bV-T9c">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -156,7 +157,7 @@
                             </searchFieldCell>
                         </searchField>
                         <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ifq-be-WCN">
-                            <rect key="frame" x="423" y="10" width="122" height="28"/>
+                            <rect key="frame" x="455" y="10" width="122" height="28"/>
                             <buttonCell key="cell" type="bevel" title="Move To" bezelStyle="regularSquare" image="button_cl" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="KhY-zZ-WRS">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>

@@ -29,6 +29,8 @@
     [super viewDidLoad];
     _sortType = SortBySize;
     
+    [_deleteButton setStrechableTitle:@"Delete" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
     _nodes = [[NSMutableArray alloc]init];

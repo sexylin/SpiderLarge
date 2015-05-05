@@ -12,6 +12,9 @@
 		F80FC33B1AC5426A00B21126 /* ResultDetaiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */; };
 		F8BC61321AEE3620009BD309 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BC61311AEE3620009BD309 /* StoreKit.framework */; };
 		F8DE64301ADCEC7800B4A66D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DE642F1ADCEC7800B4A66D /* Quartz.framework */; };
+		F8DE8EAC1AF8CC7600C2F35E /* AMCStrechableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */; };
+		F8DE8EB11AF8CCB800C2F35E /* NSButton+Addation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */; };
+		F8DE8EB21AF8CCB800C2F35E /* NSColor+AMC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */; };
 		F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */; };
 		F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11741AEDF33E00521661 /* NSData+Base64.m */; };
 		F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */; };
@@ -53,6 +56,12 @@
 		F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultDetaiViewController.xib; path = SpiderLarge/ResultDetaiViewController.xib; sourceTree = "<group>"; };
 		F8BC61311AEE3620009BD309 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F8DE642F1ADCEC7800B4A66D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		F8DE8EAA1AF8CC7600C2F35E /* AMCStrechableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCStrechableButton.h; path = SpiderLarge/AMCStrechableButton.h; sourceTree = SOURCE_ROOT; };
+		F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCStrechableButton.m; path = SpiderLarge/AMCStrechableButton.m; sourceTree = SOURCE_ROOT; };
+		F8DE8EAD1AF8CCB700C2F35E /* NSButton+Addation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSButton+Addation.h"; path = "SpiderLarge/NSButton+Addation.h"; sourceTree = SOURCE_ROOT; };
+		F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSButton+Addation.m"; path = "SpiderLarge/NSButton+Addation.m"; sourceTree = SOURCE_ROOT; };
+		F8DE8EAF1AF8CCB700C2F35E /* NSColor+AMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+AMC.h"; path = "SpiderLarge/NSColor+AMC.h"; sourceTree = SOURCE_ROOT; };
+		F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+AMC.m"; path = "SpiderLarge/NSColor+AMC.m"; sourceTree = SOURCE_ROOT; };
 		F8DF11711AEDF33E00521661 /* FBEncryptorAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEncryptorAES.h; sourceTree = "<group>"; };
 		F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		F8DF11731AEDF33E00521661 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -209,6 +218,12 @@
 		F8E9B6FA1ACBC79D008368B0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F8DE8EAD1AF8CCB700C2F35E /* NSButton+Addation.h */,
+				F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */,
+				F8DE8EAF1AF8CCB700C2F35E /* NSColor+AMC.h */,
+				F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */,
+				F8DE8EAA1AF8CC7600C2F35E /* AMCStrechableButton.h */,
+				F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */,
 				F8EA57DF1AEF5B33000D0966 /* icon.icns */,
 				F8EA57E01AEF5B33000D0966 /* icon@2x.icns */,
 				F8E9B6FB1ACBC79D008368B0 /* button_cl.png */,
@@ -341,12 +356,15 @@
 				F8E840C61AC13F2C001CCB5B /* main.m in Sources */,
 				F8E8D2011AC297B300259CDC /* SLAlertView.m in Sources */,
 				F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */,
+				F8DE8EB21AF8CCB800C2F35E /* NSColor+AMC.m in Sources */,
 				F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */,
 				F8E9B7001ACBE8B2008368B0 /* UIView.m in Sources */,
 				F80FC3361AC5243200B21126 /* DragView.m in Sources */,
 				F8E8A56B1ADFA14700646C10 /* CommonFunction.m in Sources */,
 				F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */,
 				F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */,
+				F8DE8EAC1AF8CC7600C2F35E /* AMCStrechableButton.m in Sources */,
+				F8DE8EB11AF8CCB800C2F35E /* NSButton+Addation.m in Sources */,
 				F8E840E21AC15680001CCB5B /* FileScanner.m in Sources */,
 				F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */,
 				F8E395861AF7697D007B089D /* DuplicatesWindowController.m in Sources */,

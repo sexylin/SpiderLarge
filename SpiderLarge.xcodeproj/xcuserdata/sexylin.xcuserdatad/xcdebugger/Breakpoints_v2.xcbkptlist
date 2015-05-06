@@ -2,25 +2,4 @@
 <Bucket
    type = "1"
    version = "2.0">
-<<<<<<< HEAD
-=======
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpiderLarge/ResultDetaiViewController.m"
-            timestampString = "452312907.453818"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "-sortFiles:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
->>>>>>> 322391d9de6091d02b67217a91ef5e1fca00f781
 </Bucket>

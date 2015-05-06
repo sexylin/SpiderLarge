@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F80A43EA1AF9AF8100CF09EE /* button_unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A43E91AF9AF8100CF09EE /* button_unlock.png */; };
+		F80A43EC1AF9B51C00CF09EE /* button_cl_b.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */; };
 		F80FC3361AC5243200B21126 /* DragView.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3351AC5243200B21126 /* DragView.m */; };
 		F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3381AC5426A00B21126 /* ResultDetaiViewController.m */; };
 		F80FC33B1AC5426A00B21126 /* ResultDetaiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */; };
 		F8BC61321AEE3620009BD309 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BC61311AEE3620009BD309 /* StoreKit.framework */; };
 		F8DE64301ADCEC7800B4A66D /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DE642F1ADCEC7800B4A66D /* Quartz.framework */; };
+		F8DE8EAC1AF8CC7600C2F35E /* AMCStrechableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */; };
+		F8DE8EB11AF8CCB800C2F35E /* NSButton+Addation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */; };
+		F8DE8EB21AF8CCB800C2F35E /* NSColor+AMC.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */; };
 		F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */; };
 		F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DF11741AEDF33E00521661 /* NSData+Base64.m */; };
 		F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */; };
+		F8E395861AF7697D007B089D /* DuplicatesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E395841AF7697D007B089D /* DuplicatesWindowController.m */; };
+		F8E395871AF7697D007B089D /* DuplicatesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */; };
 		F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C31AC13F2C001CCB5B /* AppDelegate.m */; };
 		F8E840C61AC13F2C001CCB5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E840C51AC13F2C001CCB5B /* main.m */; };
 		F8E840C81AC13F2C001CCB5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8E840C71AC13F2C001CCB5B /* Images.xcassets */; };
@@ -28,6 +35,8 @@
 		F8E8D2061AC2A3A400259CDC /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E8D2041AC2A3A400259CDC /* HomeViewController.xib */; };
 		F8E9B6FC1ACBC79D008368B0 /* button_cl.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E9B6FB1ACBC79D008368B0 /* button_cl.png */; };
 		F8E9B7001ACBE8B2008368B0 /* UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E9B6FF1ACBE8B2008368B0 /* UIView.m */; };
+		F8EA57E11AEF5B33000D0966 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = F8EA57DF1AEF5B33000D0966 /* icon.icns */; };
+		F8EA57E21AEF5B33000D0966 /* icon@2x.icns in Resources */ = {isa = PBXBuildFile; fileRef = F8EA57E01AEF5B33000D0966 /* icon@2x.icns */; };
 		F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EB86D61AE89AAC0002EC13 /* Criterion.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F80A43E91AF9AF8100CF09EE /* button_unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_unlock.png; sourceTree = "<group>"; };
+		F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_cl_b.png; sourceTree = "<group>"; };
 		F80FC3341AC5243200B21126 /* DragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragView.h; path = SpiderLarge/DragView.h; sourceTree = "<group>"; };
 		F80FC3351AC5243200B21126 /* DragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DragView.m; path = SpiderLarge/DragView.m; sourceTree = "<group>"; };
 		F80FC3371AC5426A00B21126 /* ResultDetaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDetaiViewController.h; path = SpiderLarge/ResultDetaiViewController.h; sourceTree = "<group>"; };
@@ -49,12 +60,21 @@
 		F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ResultDetaiViewController.xib; path = SpiderLarge/ResultDetaiViewController.xib; sourceTree = "<group>"; };
 		F8BC61311AEE3620009BD309 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F8DE642F1ADCEC7800B4A66D /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		F8DE8EAA1AF8CC7600C2F35E /* AMCStrechableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMCStrechableButton.h; path = SpiderLarge/AMCStrechableButton.h; sourceTree = SOURCE_ROOT; };
+		F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMCStrechableButton.m; path = SpiderLarge/AMCStrechableButton.m; sourceTree = SOURCE_ROOT; };
+		F8DE8EAD1AF8CCB700C2F35E /* NSButton+Addation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSButton+Addation.h"; path = "SpiderLarge/NSButton+Addation.h"; sourceTree = SOURCE_ROOT; };
+		F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSButton+Addation.m"; path = "SpiderLarge/NSButton+Addation.m"; sourceTree = SOURCE_ROOT; };
+		F8DE8EAF1AF8CCB700C2F35E /* NSColor+AMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+AMC.h"; path = "SpiderLarge/NSColor+AMC.h"; sourceTree = SOURCE_ROOT; };
+		F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+AMC.m"; path = "SpiderLarge/NSColor+AMC.m"; sourceTree = SOURCE_ROOT; };
 		F8DF11711AEDF33E00521661 /* FBEncryptorAES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEncryptorAES.h; sourceTree = "<group>"; };
 		F8DF11721AEDF33E00521661 /* FBEncryptorAES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEncryptorAES.m; sourceTree = "<group>"; };
 		F8DF11731AEDF33E00521661 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		F8DF11741AEDF33E00521661 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		F8E27D7E1ACAA61700E09026 /* SXTitleBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SXTitleBar.h; path = SpiderLarge/SXTitleBar.h; sourceTree = "<group>"; };
 		F8E27D7F1ACAA61700E09026 /* SXTitleBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SXTitleBar.m; path = SpiderLarge/SXTitleBar.m; sourceTree = "<group>"; };
+		F8E395831AF7697D007B089D /* DuplicatesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DuplicatesWindowController.h; path = SpiderLarge/DuplicatesWindowController.h; sourceTree = "<group>"; };
+		F8E395841AF7697D007B089D /* DuplicatesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DuplicatesWindowController.m; path = SpiderLarge/DuplicatesWindowController.m; sourceTree = "<group>"; };
+		F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DuplicatesWindowController.xib; path = SpiderLarge/DuplicatesWindowController.xib; sourceTree = "<group>"; };
 		F8E840BD1AC13F2C001CCB5B /* SpiderLarge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderLarge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8E840C11AC13F2C001CCB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8E840C21AC13F2C001CCB5B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -80,6 +100,9 @@
 		F8E9B6FD1ACBCDFF008368B0 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = ../Resource/common.h; sourceTree = "<group>"; };
 		F8E9B6FE1ACBE8B2008368B0 /* UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIView.h; path = SpiderLarge/UIView.h; sourceTree = SOURCE_ROOT; };
 		F8E9B6FF1ACBE8B2008368B0 /* UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIView.m; path = SpiderLarge/UIView.m; sourceTree = SOURCE_ROOT; };
+		F8EA57DF1AEF5B33000D0966 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		F8EA57E01AEF5B33000D0966 /* icon@2x.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "icon@2x.icns"; sourceTree = "<group>"; };
+		F8EA57E31AEF5D8D000D0966 /* SpiderLarge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SpiderLarge.entitlements; sourceTree = "<group>"; };
 		F8EB86D51AE89AAC0002EC13 /* Criterion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criterion.h; sourceTree = "<group>"; };
 		F8EB86D61AE89AAC0002EC13 /* Criterion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criterion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +151,9 @@
 				F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */,
 				F80FC3341AC5243200B21126 /* DragView.h */,
 				F80FC3351AC5243200B21126 /* DragView.m */,
+				F8E395831AF7697D007B089D /* DuplicatesWindowController.h */,
+				F8E395841AF7697D007B089D /* DuplicatesWindowController.m */,
+				F8E395851AF7697D007B089D /* DuplicatesWindowController.xib */,
 				F8E840BF1AC13F2C001CCB5B /* SpiderLarge */,
 				F8E840D31AC13F2C001CCB5B /* SpiderLargeTests */,
 				F8E840BE1AC13F2C001CCB5B /* Products */,
@@ -146,6 +172,7 @@
 		F8E840BF1AC13F2C001CCB5B /* SpiderLarge */ = {
 			isa = PBXGroup;
 			children = (
+				F8EA57E31AEF5D8D000D0966 /* SpiderLarge.entitlements */,
 				F8DF11701AEDF33E00521661 /* Encryption */,
 				F8E840C21AC13F2C001CCB5B /* AppDelegate.h */,
 				F8E840C31AC13F2C001CCB5B /* AppDelegate.m */,
@@ -195,6 +222,16 @@
 		F8E9B6FA1ACBC79D008368B0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */,
+				F80A43E91AF9AF8100CF09EE /* button_unlock.png */,
+				F8DE8EAD1AF8CCB700C2F35E /* NSButton+Addation.h */,
+				F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */,
+				F8DE8EAF1AF8CCB700C2F35E /* NSColor+AMC.h */,
+				F8DE8EB01AF8CCB700C2F35E /* NSColor+AMC.m */,
+				F8DE8EAA1AF8CC7600C2F35E /* AMCStrechableButton.h */,
+				F8DE8EAB1AF8CC7600C2F35E /* AMCStrechableButton.m */,
+				F8EA57DF1AEF5B33000D0966 /* icon.icns */,
+				F8EA57E01AEF5B33000D0966 /* icon@2x.icns */,
 				F8E9B6FB1ACBC79D008368B0 /* button_cl.png */,
 				F8E9B6FE1ACBE8B2008368B0 /* UIView.h */,
 				F8E9B6FF1ACBE8B2008368B0 /* UIView.m */,
@@ -260,6 +297,9 @@
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
 						};
 					};
 					F8E840CF1AC13F2C001CCB5B = {
@@ -294,10 +334,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8E840C81AC13F2C001CCB5B /* Images.xcassets in Resources */,
+				F8E395871AF7697D007B089D /* DuplicatesWindowController.xib in Resources */,
+				F8EA57E21AEF5B33000D0966 /* icon@2x.icns in Resources */,
+				F80A43EC1AF9B51C00CF09EE /* button_cl_b.png in Resources */,
+				F80A43EA1AF9AF8100CF09EE /* button_unlock.png in Resources */,
 				F8E9B6FC1ACBC79D008368B0 /* button_cl.png in Resources */,
 				F8E840CB1AC13F2C001CCB5B /* MainMenu.xib in Resources */,
 				F8E8D2061AC2A3A400259CDC /* HomeViewController.xib in Resources */,
 				F80FC33B1AC5426A00B21126 /* ResultDetaiViewController.xib in Resources */,
+				F8EA57E11AEF5B33000D0966 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,14 +364,18 @@
 				F8E840C61AC13F2C001CCB5B /* main.m in Sources */,
 				F8E8D2011AC297B300259CDC /* SLAlertView.m in Sources */,
 				F8DF11761AEDF33E00521661 /* NSData+Base64.m in Sources */,
+				F8DE8EB21AF8CCB800C2F35E /* NSColor+AMC.m in Sources */,
 				F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */,
 				F8E9B7001ACBE8B2008368B0 /* UIView.m in Sources */,
 				F80FC3361AC5243200B21126 /* DragView.m in Sources */,
 				F8E8A56B1ADFA14700646C10 /* CommonFunction.m in Sources */,
 				F8DF11751AEDF33E00521661 /* FBEncryptorAES.m in Sources */,
 				F8E840C41AC13F2C001CCB5B /* AppDelegate.m in Sources */,
+				F8DE8EAC1AF8CC7600C2F35E /* AMCStrechableButton.m in Sources */,
+				F8DE8EB11AF8CCB800C2F35E /* NSButton+Addation.m in Sources */,
 				F8E840E21AC15680001CCB5B /* FileScanner.m in Sources */,
 				F8EB86D71AE89AAC0002EC13 /* Criterion.m in Sources */,
+				F8E395861AF7697D007B089D /* DuplicatesWindowController.m in Sources */,
 				F8E8D2051AC2A3A400259CDC /* HomeViewController.m in Sources */,
 				F8E27D801ACAA61700E09026 /* SXTitleBar.m in Sources */,
 			);
@@ -446,9 +495,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				CODE_SIGN_ENTITLEMENTS = SpiderLarge/SpiderLarge.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SpiderLarge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -465,9 +515,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				CODE_SIGN_ENTITLEMENTS = SpiderLarge/SpiderLarge.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SpiderLarge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

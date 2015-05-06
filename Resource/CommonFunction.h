@@ -11,9 +11,10 @@
 #define AUTH_KEY @"sexylin2010,,."
 
 enum{
-    ModuleTypeSearch = 0,
-    ModuleTypeMove = 1,
-    ModuleTypeDuplicates = 2,
+    ModuleTypeSearch = 1,
+    ModuleTypeMove = 2,
+    ModuleTypeDuplicates = 3,
+    ModuleTypeFull = 0xff,
 };
 typedef NSInteger kModuleType;
 

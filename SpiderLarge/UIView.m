@@ -13,7 +13,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     if(!backgroundColor){
-        NSBezierPath * path = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:4.0 yRadius:4.0];
+        NSBezierPath * path = [NSBezierPath bezierPathWithRoundedRect:self.bounds xRadius:0 yRadius:0];
         [[NSBezierPath bezierPathWithRect:dirtyRect] addClip];
         
         

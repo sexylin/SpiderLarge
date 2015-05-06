@@ -10,6 +10,7 @@
 #import "UIView.h"
 #import <Quartz/Quartz.h>
 #import <StoreKit/StoreKit.h>
+#import "AMCStrechableButton.h"
 
 enum{
     SortBySize = 0,
@@ -28,11 +29,23 @@ typedef NSInteger SortType;
 
 @interface ResultDetaiViewController : NSViewController<NSOutlineViewDataSource,NSOutlineViewDelegate,ResultCellViewDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver>{
     SortType _sortType;
+    IBOutlet UIView *_topBar;
+    IBOutlet AMCStrechableButton *_deleteButton;
+    IBOutlet AMCStrechableButton *_backButton;
+    IBOutlet AMCStrechableButton *_unlockButton;
+    IBOutlet AMCStrechableButton *_purchaseFullVersion;
+    IBOutlet AMCStrechableButton *_purchaseMove;
+    IBOutlet AMCStrechableButton *_purchaseSearch;
+    IBOutlet UIView *_purchaseView;
 }
 @property (assign)IBOutlet NSOutlineView *table;
 @property (assign)IBOutlet UIView *toolBar;
 @property (assign)IBOutlet NSWindow *ruleWindow;
-@property (assign)IBOutlet NSButton *purchaseButton;
+@property (assign)IBOutlet AMCStrechableButton *moveButton;
+@property (assign)IBOutlet NSButton *duplicateButton;
+@property (assign)IBOutlet NSSearchField *searchField;
+@property (assign)IBOutlet NSWindow *coverWindow;
+@property (assign)IBOutlet NSTextField *progressingLabel;
 
 @end
 

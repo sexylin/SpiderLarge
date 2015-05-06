@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "ScanObj.h"
 #import "ResultDetaiViewController.h"
+#import "UIView.h"
+#import "AMCStrechableButton.h"
 
 @interface HomeViewController (){
     ResultDetaiViewController *resultVC;
@@ -20,6 +22,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(backToHome) name:@"BACK_TO_HOME" object:nil];
+    
+    UIView *view = self.view;
+    view.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
+    view.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
+    
+    _toolBar.startColor = [NSColor colorWithCalibratedRed:58/255.0 green:56/255.0 blue:67/255.0 alpha:1.0f];
+    _toolBar.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
+    
+    [_addFolder setStrechableTitle:@"Add Folder To Start" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    
+    NSBox *horizon = [[NSBox alloc]initWithFrame:CGRectMake(0, 499, 720, 1)];
+    horizon.boxType = NSBoxCustom;
+    horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon];
+    
+    NSBox *horizon1 = [[NSBox alloc]initWithFrame:CGRectMake(0, 48, 720, 1)];
+    horizon1.boxType = NSBoxCustom;
+    horizon1.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon1];
+    
+    NSMutableParagraphStyle *parastyle = [[[NSMutableParagraphStyle alloc]init]autorelease];
+    [parastyle setAlignment:NSCenterTextAlignment];
+    
+    NSAttributedString *attstr = [[NSAttributedString alloc]initWithString:@"Drag Folder Here Or  Click To Add Folder " attributes:@{NSForegroundColorAttributeName:[NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f],NSParagraphStyleAttributeName:parastyle,NSFontAttributeName:[NSFont systemFontOfSize:14.0f]}];
+    [_addButton setAttributedTitle:attstr];
     // Do view setup here.
 }
 
@@ -27,6 +56,27 @@
     [super awakeFromNib];
     self.dragView.delegate = self;
     [self.dragView startUpdate];
+}
+
+- (IBAction)clickAddButton:(id)sender{
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    NSString *username =NSFullUserName();
+    NSURL *dirUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"/Users/%@",username] isDirectory:YES];
+    [openPanel setDirectoryURL:dirUrl];
+    openPanel.canChooseDirectories = YES;
+    openPanel.canChooseFiles = NO;
+    openPanel.allowsMultipleSelection = YES;
+    [openPanel setPrompt:@"Import"];
+    [openPanel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
+        if(result == 1){
+            NSArray *urls = openPanel.URLs;
+            NSMutableArray *paths = [NSMutableArray array];
+            for(NSURL *url in urls){
+                [paths addObject:[url path]];
+            }
+            [self dragFilesIn:paths];
+        }
+    }];
 }
 
 - (void)dragFilesIn:(NSArray *)files{
@@ -44,6 +94,13 @@
     
     resultVC = [[ResultDetaiViewController alloc]initWithNibName:@"ResultDetaiViewController" bundle:nil];
     [self.view addSubview:resultVC.view];
+    [self.dragView enableDrag:NO];
+    [_addFolder setEnabled:NO];
+}
+
+- (void)backToHome{
+    [self.dragView enableDrag:YES];
+    [_addFolder setEnabled:YES];
 }
 
 - (void)closeProgress{

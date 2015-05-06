@@ -20,4 +20,5 @@
 
 @property (nonatomic,assign)BOOL isCheck;
 @property (nonatomic,assign)BOOL isSelect;
+@property (nonatomic,assign)BOOL isExpand;
 @end

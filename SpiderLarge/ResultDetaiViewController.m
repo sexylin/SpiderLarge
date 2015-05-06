@@ -1,4 +1,4 @@
-//
+ //
 //  ResultDetaiViewController.m
 //  SpiderLarge
 //
@@ -17,6 +17,15 @@
     NSMutableDictionary *_cellQueue;
     NSMutableArray *_selectArr;
     NSMutableArray *_nodes;
+    NSString *_purchaseID;
+    NSString *_searchString;
+    
+    ScanObj *archiever;
+    ScanObj *movies;
+    ScanObj *music;
+    ScanObj *documents;
+    ScanObj *picture ;
+    ScanObj *other;
 }
 
 @end
@@ -25,22 +34,90 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _sortType = SortBySize;
+    
+    archiever = [[ScanObj alloc]init];
+    archiever.filePath = @"Archivers";
+    movies = [[ScanObj alloc]init];
+    movies.filePath = @"Movies";
+    music = [[ScanObj alloc]init];
+    music.filePath = @"Music";
+    documents = [[ScanObj alloc]init];
+    documents.filePath = @"Documents";
+    picture = [[ScanObj alloc]init];
+    picture.filePath = @"Picture";
+    other = [[ScanObj alloc]init];
+    other.filePath = @"Others";
+    
+    
+    [_deleteButton setStrechableTitle:@"Delete" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    [_moveButton setStrechableTitle:@"Move To" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    [_backButton setStrechableTitle:@"Back" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    [_unlockButton setStrechableTitle:@"Unlock More Functions" image:[NSImage imageNamed:@"button_unlock"] alterImage:nil];
+    [_unlockButton setFrameOrigin:CGPointMake(NSMaxX(_backButton.frame)+10, NSMinY(_backButton.frame))];
+    [_moveButton setFrameOrigin:NSMakePoint(CGRectGetMinX(_deleteButton.frame)-15-CGRectGetWidth(_moveButton.frame), NSMinY(_deleteButton.frame))];
+    
+    [_purchaseFullVersion setStrechableTitle:@"Unlock Full Version" image:[NSImage imageNamed:@"button_unlock"] alterImage:nil];
+    [_purchaseMove setStrechableTitle:@"Unlock Move Function" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    [_purchaseSearch setStrechableTitle:@"Unlock Search Function" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    
+    if([CommonFunction clearModule:ModuleTypeMove]) [_purchaseMove setEnabled:NO];
+    if([CommonFunction clearModule:ModuleTypeSearch]) [_purchaseMove setEnabled:NO];
+    
+    if([CommonFunction clearModule:ModuleTypeSearch] && [CommonFunction clearModule:ModuleTypeMove]) [_unlockButton setHidden:YES];
+    
+    _purchaseView.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
+    _purchaseView.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
+    
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
     _nodes = [[NSMutableArray alloc]init];
+    _searchString = nil;
     
-    self.toolBar.startColor = [NSColor colorWithCalibratedRed:202/255.0 green:233/255.0 blue:255/255.0f alpha:1.0f];
-    self.toolBar.endColor = [NSColor colorWithCalibratedRed:159/255.0f green:183/255.0f blue:255/255.0f alpha:1.0f];
+    NSBox *horizon = [[NSBox alloc]initWithFrame:CGRectMake(0, 499, CGRectGetWidth(self.view.frame), 1)];
+    horizon.boxType = NSBoxCustom;
+    horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon];
+    
+    NSBox *horizon1 = [[NSBox alloc]initWithFrame:CGRectMake(0, 48, CGRectGetWidth(self.view.frame), 1)];
+    horizon1.boxType = NSBoxCustom;
+    horizon1.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+    [self.view addSubview:horizon1];
+    
+    _topBar.backgroundColor = [NSColor colorWithCalibratedRed:78/255.0 green:80/255.0 blue:90/255.0 alpha:1.0f];
+    
+    _toolBar.startColor = [NSColor colorWithCalibratedRed:58/255.0 green:56/255.0 blue:67/255.0 alpha:1.0f];
+    _toolBar.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
     scanner = [FileScanner shareScanner];
+    
+    if([CommonFunction clearModule:ModuleTypeFull]){
+        [self unlockModule:ModuleTypeFull];
+    }else{
+        if([CommonFunction clearModule:ModuleTypeMove]){
+            [self unlockModule:ModuleTypeMove];
+        }
+        if([CommonFunction clearModule:ModuleTypeSearch]){
+            [self unlockModule:ModuleTypeSearch];
+        }
+        if([CommonFunction clearModule:ModuleTypeDuplicates]){
+            [self unlockModule:ModuleTypeDuplicates];
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:NSControlTextDidChangeNotification object:nil];
+    
     // Do view setup here.
 }
 
 - (void)reloadTable{
-    [self sortFiles:SortBySize];
-    [self.table reloadData];
+    [self sortFiles:_sortType];
+    if([_nodes count] > 0){
+        [self.table expandItem:[_nodes objectAtIndex:0]];
+    }
 }
 
 - (IBAction)backToHome:(id)sender{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"BACK_TO_HOME" object:nil];
     [self.view removeFromSuperview];
 }
 
@@ -50,10 +127,16 @@
     open.canChooseDirectories = YES;
     open.canCreateDirectories = YES;
     open.allowsMultipleSelection = NO;
+    open.prompt = @"Move";
     [open beginSheetForDirectory:[NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) objectAtIndex:0] file:nil types:nil modalForWindow:self.view.window modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 - (IBAction)clickDeleteButton:(id)sender{
+    if([_selectArr count] == 0){
+        NSAlert *alert = [NSAlert alertWithMessageText:@"No item selected!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please select at least one item to delete."];
+        [alert runModal];
+        return;
+    }
     NSMutableArray *removes = [NSMutableArray array];
     NSFileManager *fm = [NSFileManager defaultManager];
     for(ScanObj *obj in _selectArr){
@@ -73,14 +156,54 @@
     }];
 }
 
+- (IBAction)endSheet:(id)sender{
+    [self.view.window endSheet:self.ruleWindow];
+}
+
+- (void)checkDuplicates{
+    NSMutableArray *md5s = [NSMutableArray array];
+    for(int i=0;i<[scanner.scanResults count];i++){
+        ScanObj *file  = [scanner.scanResults objectAtIndex:i];
+        NSString *fileMd5 = [CommonFunction fileMD5:file.filePath];
+        [md5s addObject:fileMd5];
+    }
+}
+
+- (void)showCover{
+    self.progressingLabel.stringValue = @"";
+    self.coverWindow.backgroundColor = [NSColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [self.ruleWindow beginSheet:self.coverWindow completionHandler:nil];
+}
+
+- (void)dismissCover{
+    [self.ruleWindow endSheet:self.coverWindow];
+}
+
 - (IBAction)purchaseItem:(NSButton *)sender{
     if([SKPaymentQueue canMakePayments]){
         if(sender.tag == 1001){
+            _purchaseID = kProductID1;
             SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID1]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if(sender.tag == 1002){
+            _purchaseID = kProductID2;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID2]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if (sender.tag == 1003){
+            _purchaseID = kProductID3;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID3]];
+            prdReq.delegate = self;
+            [prdReq start];
+        }else if (sender.tag == 1004){
+            _purchaseID = kProductID4;
+            SKProductsRequest *prdReq = [[SKProductsRequest alloc]initWithProductIdentifiers:[NSSet setWithObject:kProductID4]];
             prdReq.delegate = self;
             [prdReq start];
         }
     }
+    [self showCover];
 }
 
 - (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo{
@@ -162,22 +285,26 @@
     _sortType = type;
     
     [_nodes removeAllObjects];
-    [_cellQueue removeAllObjects];
+    [archiever.subObjects removeAllObjects];
+    [documents.subObjects removeAllObjects];
+    [movies.subObjects removeAllObjects];
+    [picture.subObjects removeAllObjects];
+    [music.subObjects removeAllObjects];
+    [other.subObjects removeAllObjects];
     
-    ScanObj *archiever = [[[ScanObj alloc]init]autorelease];
-    archiever.filePath = @"Archivers";
-    ScanObj *movies = [[[ScanObj alloc]init]autorelease];
-    movies.filePath = @"Movies";
-    ScanObj *music = [[[ScanObj alloc]init]autorelease];
-    music.filePath = @"Music";
-    ScanObj *documents = [[[ScanObj alloc]init]autorelease];
-    documents.filePath = @"Documents";
-    ScanObj *picture = [[[ScanObj alloc]init]autorelease];
-    picture.filePath = @"Picture";
-    ScanObj *other = [[[ScanObj alloc]init]autorelease];
-    other.filePath = @"Others";
+    NSMutableArray *copyArr = [NSMutableArray array];
+    if(_searchString){
+        for(ScanObj *obj in scanner.scanResults){
+            NSString *suffixStr = [obj.filePath pathExtension];
+            if([suffixStr rangeOfString:_searchString].location != NSNotFound){
+                [copyArr addObject:obj];
+            }
+        }
+    }else{
+        [copyArr addObjectsFromArray:scanner.scanResults];
+    }
     
-    for(ScanObj *obj in scanner.scanResults){
+    for(ScanObj *obj in copyArr){
         NSString *copyName = [obj.name copy];
         obj.name = [obj.name lowercaseString];
         
@@ -257,6 +384,7 @@
             break;
     }
     
+<<<<<<< HEAD
     if([archiever.subObjects count]>0)[_nodes addObject:archiever];
     if([movies.subObjects count]>0)[_nodes addObject:movies];
     if([music.subObjects count]>0)[_nodes addObject:music];
@@ -264,6 +392,8 @@
     if([picture.subObjects count]>0)[_nodes addObject:picture];
     if([other.subObjects count]>0)[_nodes addObject:other];
     
+=======
+>>>>>>> 4089fcb7c8e0d69a718f19fd5842d9155d030589
     [self.table reloadData];
 }
 
@@ -325,6 +455,54 @@
     [self.table reloadData];
 }
 
+- (kModuleType)moduleTypeForProductID:(NSString *)prdID{
+    kModuleType type;
+    if([prdID isEqualToString:kProductID1])
+        type = ModuleTypeFull;
+    else if ([prdID isEqualToString:kProductID2])
+        type = ModuleTypeMove;
+    else if ([prdID isEqualToString:kProductID3])
+        type = ModuleTypeSearch;
+    else if([prdID isEqualToString:kProductID4])
+        type = ModuleTypeDuplicates;
+    return type;
+}
+
+- (void)unlockModule:(kModuleType)type{
+    if(type == ModuleTypeFull){
+        [_unlockButton setHidden:YES];
+        [self.searchField setHidden:NO];
+        [self.moveButton setHidden:NO];
+        [self.duplicateButton setHidden:NO];
+    }else if (type == ModuleTypeMove){
+        [self.moveButton setHidden:NO];
+    }else if (type == ModuleTypeSearch){
+        [self.searchField setHidden:NO];
+    }else if (type == ModuleTypeDuplicates){
+        [self.duplicateButton setHidden:NO];
+    }
+}
+
+- (void)textDidChange:(NSNotification *)notification{
+    NSTextField *txt = notification.object;
+    if([[txt class]isSubclassOfClass:[NSSearchField class]]){
+        NSString *string = txt.stringValue;
+        _searchString = [string copy];
+        
+        if([_searchString length] == 0) _searchString = nil;
+        
+        [self sortFiles:_sortType];
+        
+        if(_searchString){
+            for(ScanObj *node in _nodes){
+                node.isExpand = YES;
+                
+                [self.table expandItem:node];
+            }
+        }
+    }
+}
+
 #pragma mark - TableView Delegate
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item{
     if(item){
@@ -335,11 +513,11 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     ScanObj *obj = (ScanObj *)item;
-    ResultCellView *cell = [_cellQueue objectForKey:obj.filePath];
-    if(!cell){
-        cell = [[[ResultCellView alloc]init]autorelease];
-        [_cellQueue setObject:cell forKey:obj.filePath];
-    }
+    ResultCellView *cell = [[[ResultCellView alloc]init]autorelease];
+//    if(!cell){
+//        cell = [[[ResultCellView alloc]init]autorelease];
+//        //[_cellQueue setObject:cell forKey:obj.filePath];
+//    }
     
     if([obj.subObjects count] == 0){
         cell.delegate = self;
@@ -350,18 +528,22 @@
         
         cell.iconView.image = [workspace iconForFile:file_path];
         if(cell.node.isSelect){
-            cell.backgroundColor = [NSColor yellowColor];
+            cell.backgroundColor = [NSColor colorWithCalibratedRed:56/255.0f green:57/255.0f blue:67/255.0f alpha:1.0f];
         }else{
-            cell.backgroundColor = [NSColor colorWithCalibratedRed:244/255.0f green:244/255.0f blue:205/255.0f alpha:1.0f];
+            cell.backgroundColor = [NSColor colorWithCalibratedRed:80/255.0f green:82/255.0f blue:92/255.0f alpha:1.0f];
         }
         
         cell.pathLabel.stringValue = file_path;
         cell.sizeLabel.stringValue = [CommonFunction getSizeDesc:cell.node.fileSize];
-        cell.dateLabel.stringValue = [NSString stringWithFormat:@"%@",obj.modifyDate];
+        NSDateFormatter *dateFormat = [[[NSDateFormatter alloc]init]autorelease];
+        dateFormat.dateFormat = @"YYYY/MM/dd";
+        
+        cell.dateLabel.stringValue = [NSString stringWithFormat:@"%@",[dateFormat stringFromDate:obj.modifyDate]];
     }else{
         cell.delegate = self;
         cell.node = obj;
-        [obj addObserver:cell forKeyPath:@"isCheck" options:NSKeyValueObservingOptionNew context:@"isCheck"];
+        //[obj addObserver:cell forKeyPath:@"isCheck" options:NSKeyValueObservingOptionNew context:@"isCheck"];
+        cell.backgroundColor = [NSColor colorWithCalibratedRed:56/255.0f green:57/255.0f blue:67/255.0f alpha:1.0f];
         
         NSString *file_path = obj.filePath;
         cell.pathLabel.stringValue = file_path;
@@ -396,25 +578,37 @@
 }
 //
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item{
+    ScanObj *obj = (ScanObj *)item;
+    if([obj.subObjects count] > 0)return 28;
     return 45;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item{
-    if([[item subObjects]count] > 0)return YES;
     return NO;
 }
 //
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item{
-    if([[item subObjects]count] > 0) return YES;
+    ScanObj *obj = (ScanObj *)item;
+    if([[item subObjects]count] > 0) {
+        obj.isExpand = YES;
+        return YES;
+    }
     return NO;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item{
-    return YES;
+    ScanObj *obj = (ScanObj *)item;
+    if([[item subObjects]count] > 0) {
+        obj.isExpand = NO;
+       return YES;
+    }
+    return NO;
 }
 
 #pragma mark - purchase
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+    if([response.invalidProductIdentifiers count] > 0) return;
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver: self];
     
     for (SKProduct *product in response.products)
@@ -426,7 +620,7 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentQueue *)queue
 {
-    NSLog(@"所有购买数据完成\n");
+    NSLog(@"恢复上次购买...\n");
 }
 
 
@@ -441,16 +635,30 @@
 {
     for (SKPaymentTransaction *transaction in transactions)
     {
+        NSString *productID = transaction.payment.productIdentifier;
+        NSLog(@"productID:%@\n",productID);
+        
         if (transaction.transactionState == SKPaymentTransactionStatePurchasing)
         {
             NSLog(@"正在处理...\n");
+            self.progressingLabel.stringValue = @"Transaction start...";
         }
         else if (transaction.transactionState == SKPaymentTransactionStatePurchased)
         {
            NSLog(@"购买成功...\n");
+            if([_purchaseID isEqualToString:productID]){
+                self.progressingLabel.stringValue = @"Pay success...";
+                [self dismissCover];
+                
+                kModuleType clearType = [self moduleTypeForProductID:productID];
+                [CommonFunction unlockModule:clearType];
+                [self unlockModule:clearType];
+            }
         }
         else if (transaction.transactionState == SKPaymentTransactionStateFailed)
         {
+            self.progressingLabel.stringValue = @"Payment failed...";
+            [self dismissCover];
            NSLog(@"购买失败...\n");
         }
         else if(transaction.transactionState == SKPaymentTransactionStateRestored)
@@ -458,6 +666,10 @@
             NSLog(@"恢复上次购买...\n");
         }
 //        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
+<<<<<<< HEAD
+=======
+//            self.progressingLabel.stringValue = @"Waiting...";
+>>>>>>> 4089fcb7c8e0d69a718f19fd5842d9155d030589
 //            NSLog(@"等待购买...\n");
 //        }
     }
@@ -466,13 +678,14 @@
 
 - (void)paymentQueue: (SKPaymentQueue *)queue removedTransactions: (NSArray *)transactions
 {
+    NSLog(@"remove transition\n");
     [[SKPaymentQueue defaultQueue] removeTransactionObserver: self];
 }
 
 @end
 
 @implementation ResultCellView{
-    UIView *sperateLine;
+    NSBox *horizon;
 }
 @synthesize iconView,pathLabel,sizeLabel,dateLabel,checkButton,delegate,node;
 
@@ -500,8 +713,10 @@
         dateLabel.editable = NO;
         dateLabel.bordered = NO;
         
-        sperateLine = [[UIView alloc]init];
-        
+        horizon = [[NSBox alloc]init];
+        horizon.boxType = NSBoxCustom;
+        horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
+        [self addSubview:horizon];
         
         [self addSubview:checkButton];
         [self addSubview:iconView];
@@ -513,7 +728,8 @@
 }
 
 - (void)dealloc{
-    [self.node removeObserver:self forKeyPath:@"isCheck"];
+    //[self.node removeObserver:self forKeyPath:@"isCheck"];
+    [self.node release];
     [super dealloc];
 }
 
@@ -530,15 +746,18 @@
     [super viewDidMoveToWindow];
     
     if([self.node.subObjects count] > 0){
-        checkButton.frame = CGRectMake(5, 9, 18, 18);
-        pathLabel.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 500, 20);
+        checkButton.frame = CGRectMake(5, 5, 18, 18);
+        pathLabel.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 500, 25);
     }else{
-        checkButton.frame = CGRectMake(5, 9, 18, 18);
-        iconView.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 5, 26, 26);
-        pathLabel.frame = CGRectMake(CGRectGetMaxX(iconView.frame)+5, 5, 500, 20);
-        sizeLabel.frame = CGRectMake(CGRectGetMaxX(pathLabel.frame)+5, 5, 60, 20);
-        dateLabel.frame = CGRectMake(CGRectGetMaxX(sizeLabel.frame)+5, 5, 80, 20);
+        checkButton.frame = CGRectMake(5, 13.5, 18, 18);
+        iconView.frame = CGRectMake(CGRectGetMaxX(checkButton.frame)+5, 9, 26, 26);
+        pathLabel.frame = CGRectMake(CGRectGetMaxX(iconView.frame)+5, 13, 500, 20);
+        sizeLabel.frame = CGRectMake(CGRectGetMaxX(pathLabel.frame)+5, 13, 60, 25);
+        dateLabel.frame = CGRectMake(CGRectGetMaxX(sizeLabel.frame)+5, 13, 80, 25);
     }
+    
+    
+    horizon.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 1);
     
     if(self.node.isCheck) checkButton.state = NSOnState;
     else checkButton.state = NSOffState;
@@ -564,7 +783,7 @@
         [self.delegate rightClick:self.node];
     }
     
-    NSMenu *menu = [[NSMenu alloc]init];
+    NSMenu *menu = [[[NSMenu alloc]init]autorelease];
     NSMenuItem *item1 = [[[NSMenuItem alloc]init]autorelease];
     item1.title = @"Show in finder";
     item1.target = self;
@@ -572,7 +791,7 @@
     [menu addItem:item1];
     
     NSMenuItem *item2 = [[[NSMenuItem alloc]init]autorelease];
-    item2.title = @"Preview";
+    item2.title = @"Quick Look ";
     item2.target = self;
     item2.action = @selector(clickMenuItem:);
     [menu addItem:item2];
@@ -605,13 +824,13 @@
         [[QLPreviewPanel sharedPreviewPanel]orderOut:nil];
     }else{
         QLPreviewPanel *viewPanel = [QLPreviewPanel sharedPreviewPanel];
-        viewPanel.delegate = self;
         viewPanel.dataSource = self;
+        id contr = viewPanel.currentController;
         [viewPanel makeKeyAndOrderFront:nil];
     }
 }
 
-/*- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
     return 1;
 }
 
@@ -620,14 +839,42 @@
     return previewUrl;
 }
 
-- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item{
-    NSView *superV = self.superview;
-    return superV.frame;
-}
+//- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item{
+//    NSView *superV = self.superview;
+//    return superV.frame;
+//}
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel{
     return YES;
-}*/
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel{
+    panel.delegate = self;
+    panel.dataSource = self;
+    [panel reloadData];
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel{
+    panel.delegate = nil;
+    panel.dataSource = nil;
+}
+
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
+{
+    return YES;
+}
+
+// This delegate method provides the rect on screen from which the panel will zoom.
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
+{
+    return NSZeroRect;
+}
+
+// This delegate method provides a transition image between the table view and the preview panel
+- (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect
+{
+    return nil;
+}
 
 @end
 

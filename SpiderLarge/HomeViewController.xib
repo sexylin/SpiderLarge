@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
@@ -7,7 +7,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="_addButton" destination="beq-Rk-qrv" id="wq6-2P-aGf"/>
+                <outlet property="_addFolder" destination="DEs-2i-NQn" id="gQh-SV-Lz5"/>
                 <outlet property="_proWindow" destination="Gyv-s6-Sid" id="kCh-aA-6Zt"/>
+                <outlet property="_toolBar" destination="ZoG-x6-wu0" id="Tmn-uB-X3I"/>
                 <outlet property="dragView" destination="2PC-fY-QDH" id="Bva-pa-Qhz"/>
                 <outlet property="pathLabel" destination="hiI-m0-OJk" id="4Gv-Ph-9HH"/>
                 <outlet property="proIndicator" destination="gWe-UQ-Nh4" id="Px5-8t-bpT"/>
@@ -16,20 +19,54 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView id="Hz6-mo-xeY" customClass="UIView">
             <rect key="frame" x="0.0" y="0.0" width="720" height="500"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2PC-fY-QDH" customClass="DragView">
-                    <rect key="frame" x="85" y="96" width="550" height="345"/>
+                    <rect key="frame" x="25" y="63" width="670" height="371"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beq-Rk-qrv">
+                            <rect key="frame" x="0.0" y="0.0" width="670" height="371"/>
+                            <buttonCell key="cell" type="bevel" title="Drag Folder Here Or  Click To Add Folder " bezelStyle="regularSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="aK1-d5-YTv">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickAddButton:" target="-2" id="167-bV-UR8"/>
+                            </connections>
+                        </button>
+                    </subviews>
                 </customView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="beq-Rk-qrv">
-                    <rect key="frame" x="270" y="38" width="180" height="19"/>
-                    <buttonCell key="cell" type="roundRect" title="Click To Add Files" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aK1-d5-YTv">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                    </buttonCell>
-                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9JA-bX-PJL">
+                    <rect key="frame" x="25" y="458" width="554" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Drag folder to this view or Click add folder button to start." id="33b-qc-jgu">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <box verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="G18-fS-6yr">
+                    <rect key="frame" x="20" y="447" width="680" height="5"/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZoG-x6-wu0" customClass="UIView">
+                    <rect key="frame" x="0.0" y="0.0" width="720" height="48"/>
+                    <subviews>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DEs-2i-NQn" customClass="AMCStrechableButton">
+                            <rect key="frame" x="25" y="10" width="160" height="28"/>
+                            <buttonCell key="cell" type="bevel" title="Add Folder To Start" bezelStyle="regularSquare" image="button_cl" imagePosition="overlaps" alignment="center" imageScaling="axesIndependently" inset="2" id="IL0-PU-oHV">
+                                <behavior key="behavior" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickAddButton:" target="-2" id="U1w-Pa-rLK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
             </subviews>
             <point key="canvasLocation" x="583" y="554"/>
         </customView>
@@ -59,4 +96,7 @@
             <point key="canvasLocation" x="556.5" y="-19"/>
         </window>
     </objects>
+    <resources>
+        <image name="button_cl" width="100" height="28"/>
+    </resources>
 </document>

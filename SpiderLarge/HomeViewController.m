@@ -10,6 +10,7 @@
 #import "ScanObj.h"
 #import "ResultDetaiViewController.h"
 #import "UIView.h"
+#import "AMCStrechableButton.h"
 
 @interface HomeViewController (){
     ResultDetaiViewController *resultVC;
@@ -29,6 +30,8 @@
     _toolBar.startColor = [NSColor colorWithCalibratedRed:58/255.0 green:56/255.0 blue:67/255.0 alpha:1.0f];
     _toolBar.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
     
+    [_addFolder setStrechableTitle:@"Add Folder To Start" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    
     NSBox *horizon = [[NSBox alloc]initWithFrame:CGRectMake(0, 499, 720, 1)];
     horizon.boxType = NSBoxCustom;
     horizon.fillColor = [NSColor colorWithCalibratedRed:60/255.0 green:60/255.0 blue:80/255.0 alpha:1.0];
@@ -42,7 +45,7 @@
     NSMutableParagraphStyle *parastyle = [[[NSMutableParagraphStyle alloc]init]autorelease];
     [parastyle setAlignment:NSCenterTextAlignment];
     
-    NSAttributedString *attstr = [[NSAttributedString alloc]initWithString:@"Click to add folder" attributes:@{NSForegroundColorAttributeName:[NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f],NSParagraphStyleAttributeName:parastyle,NSFontAttributeName:[NSFont systemFontOfSize:14.0f]}];
+    NSAttributedString *attstr = [[NSAttributedString alloc]initWithString:@"Drag Folder Here Or  Click To Add Folder " attributes:@{NSForegroundColorAttributeName:[NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f],NSParagraphStyleAttributeName:parastyle,NSFontAttributeName:[NSFont systemFontOfSize:14.0f]}];
     [_addButton setAttributedTitle:attstr];
     // Do view setup here.
 }

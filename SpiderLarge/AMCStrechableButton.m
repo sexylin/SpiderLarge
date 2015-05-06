@@ -77,13 +77,13 @@
     [self setTitleWithColor:title withTextColor:kTextColor];
     float width = CGRectGetWidth(self.frame);
     [[self cell]setImageScaling:NSImageScaleProportionallyUpOrDown];
-    self.frame = CGRectMake((int)CGRectGetMinX(self.frame),(int) CGRectGetMinY(self.frame), (int)(width+k_left_cap_width+k_right_cap_width), (int)NSHeight(self.frame));
+//    self.frame = CGRectMake((int)CGRectGetMinX(self.frame),(int) CGRectGetMinY(self.frame), (int)(width+k_left_cap_width+k_right_cap_width), (int)NSHeight(self.frame));
     if(image != nil){
-        [self setImage:[NSImage stretchableImageWithLeftWidth:k_left_cap_width middleWidth:1 rightWidth:k_right_cap_width toSize:NSMakeSize((int)(width+k_left_cap_width+k_right_cap_width), image.size.height) fromImage:image]];
+        [self setImage:[NSImage stretchableImageWithLeftWidth:k_left_cap_width middleWidth:1 rightWidth:k_right_cap_width toSize:NSMakeSize((int)(width), image.size.height) fromImage:image]];
     }
     
     if(alterimage != nil){
-        [self setAlternateImage:[NSImage stretchableImageWithLeftWidth:k_left_cap_width middleWidth:1 rightWidth:k_right_cap_width toSize:NSMakeSize((int)(width+k_left_cap_width+k_right_cap_width), alterimage.size.height) fromImage:alterimage]];
+        [self setAlternateImage:[NSImage stretchableImageWithLeftWidth:k_left_cap_width middleWidth:1 rightWidth:k_right_cap_width toSize:NSMakeSize((int)(width), alterimage.size.height) fromImage:alterimage]];
     }
     [self setNeedsDisplay:YES];
 }

@@ -11,10 +11,13 @@
 #import "FileScanner.h"
 
 @class UIView;
+@class AMCStrechableButton;
+
 @interface HomeViewController : NSViewController<DragFilesDelegate,FileScannerDelegate>{
     IBOutlet NSWindow *_proWindow;
     IBOutlet UIView   *_toolBar;
     IBOutlet NSButton *_addButton;
+    IBOutlet AMCStrechableButton *_addFolder;
 }
 @property (assign)IBOutlet DragView *dragView;
 @property (assign)IBOutlet NSTextField *pathLabel;

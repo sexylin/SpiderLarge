@@ -1,4 +1,4 @@
-//
+ //
 //  ResultDetaiViewController.m
 //  SpiderLarge
 //
@@ -19,6 +19,13 @@
     NSMutableArray *_nodes;
     NSString *_purchaseID;
     NSString *_searchString;
+    
+    ScanObj *archiever;
+    ScanObj *movies;
+    ScanObj *music;
+    ScanObj *documents;
+    ScanObj *picture ;
+    ScanObj *other;
 }
 
 @end
@@ -29,7 +36,38 @@
     [super viewDidLoad];
     _sortType = SortBySize;
     
+    archiever = [[ScanObj alloc]init];
+    archiever.filePath = @"Archivers";
+    movies = [[ScanObj alloc]init];
+    movies.filePath = @"Movies";
+    music = [[ScanObj alloc]init];
+    music.filePath = @"Music";
+    documents = [[ScanObj alloc]init];
+    documents.filePath = @"Documents";
+    picture = [[ScanObj alloc]init];
+    picture.filePath = @"Picture";
+    other = [[ScanObj alloc]init];
+    other.filePath = @"Others";
+    
+    
     [_deleteButton setStrechableTitle:@"Delete" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    [_moveButton setStrechableTitle:@"Move To" image:[NSImage imageNamed:@"button_cl"] alterImage:nil];
+    [_backButton setStrechableTitle:@"Back" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    [_unlockButton setStrechableTitle:@"Unlock More Functions" image:[NSImage imageNamed:@"button_unlock"] alterImage:nil];
+    [_unlockButton setFrameOrigin:CGPointMake(NSMaxX(_backButton.frame)+10, NSMinY(_backButton.frame))];
+    [_moveButton setFrameOrigin:NSMakePoint(CGRectGetMinX(_deleteButton.frame)-15-CGRectGetWidth(_moveButton.frame), NSMinY(_deleteButton.frame))];
+    
+    [_purchaseFullVersion setStrechableTitle:@"Unlock Full Version" image:[NSImage imageNamed:@"button_unlock"] alterImage:nil];
+    [_purchaseMove setStrechableTitle:@"Unlock Move Function" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    [_purchaseSearch setStrechableTitle:@"Unlock Search Function" image:[NSImage imageNamed:@"button_cl_b"] alterImage:nil];
+    
+    if([CommonFunction clearModule:ModuleTypeMove]) [_purchaseMove setEnabled:NO];
+    if([CommonFunction clearModule:ModuleTypeSearch]) [_purchaseMove setEnabled:NO];
+    
+    if([CommonFunction clearModule:ModuleTypeSearch] && [CommonFunction clearModule:ModuleTypeMove]) [_unlockButton setHidden:YES];
+    
+    _purchaseView.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
+    _purchaseView.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
     
     _cellQueue = [[NSMutableDictionary alloc]init];
     _selectArr = [[NSMutableArray alloc]init];
@@ -73,7 +111,9 @@
 
 - (void)reloadTable{
     [self sortFiles:_sortType];
-    [self.table reloadData];
+    if([_nodes count] > 0){
+        [self.table expandItem:[_nodes objectAtIndex:0]];
+    }
 }
 
 - (IBAction)backToHome:(id)sender{
@@ -244,20 +284,12 @@
     _sortType = type;
     
     [_nodes removeAllObjects];
-    [_cellQueue removeAllObjects];
-    
-    ScanObj *archiever = [[[ScanObj alloc]init]autorelease];
-    archiever.filePath = @"Archivers";
-    ScanObj *movies = [[[ScanObj alloc]init]autorelease];
-    movies.filePath = @"Movies";
-    ScanObj *music = [[[ScanObj alloc]init]autorelease];
-    music.filePath = @"Music";
-    ScanObj *documents = [[[ScanObj alloc]init]autorelease];
-    documents.filePath = @"Documents";
-    ScanObj *picture = [[[ScanObj alloc]init]autorelease];
-    picture.filePath = @"Picture";
-    ScanObj *other = [[[ScanObj alloc]init]autorelease];
-    other.filePath = @"Others";
+    [archiever.subObjects removeAllObjects];
+    [documents.subObjects removeAllObjects];
+    [movies.subObjects removeAllObjects];
+    [picture.subObjects removeAllObjects];
+    [music.subObjects removeAllObjects];
+    [other.subObjects removeAllObjects];
     
     NSMutableArray *copyArr = [NSMutableArray array];
     if(_searchString){
@@ -332,7 +364,6 @@
             [music.subObjects sortUsingComparator:compareBlock];
             [picture.subObjects sortUsingComparator:compareBlock];
             [other.subObjects sortUsingComparator:compareBlock];
-            [self.table reloadData];
         }
             break;
         case SortBySize:{
@@ -353,16 +384,13 @@
             [music.subObjects sortUsingComparator:compareBlock];
             [picture.subObjects sortUsingComparator:compareBlock];
             [other.subObjects sortUsingComparator:compareBlock];
-            [self.table reloadData];
         }
             break;
         default:
             break;
     }
     
-    if([_nodes count] > 0){
-        [self.table expandItem:[_nodes objectAtIndex:0]];
-    }
+    [self.table reloadData];
 }
 
 - (void)clickCheckButton:(ScanObj *)obj{
@@ -438,7 +466,7 @@
 
 - (void)unlockModule:(kModuleType)type{
     if(type == ModuleTypeFull){
-        [self.purchaseButton setHidden:YES];
+        [_unlockButton setHidden:YES];
         [self.searchField setHidden:NO];
         [self.moveButton setHidden:NO];
         [self.duplicateButton setHidden:NO];
@@ -481,11 +509,11 @@
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item{
     ScanObj *obj = (ScanObj *)item;
-    ResultCellView *cell = [_cellQueue objectForKey:obj.filePath];
-    if(!cell){
-        cell = [[[ResultCellView alloc]init]autorelease];
-        [_cellQueue setObject:cell forKey:obj.filePath];
-    }
+    ResultCellView *cell = [[[ResultCellView alloc]init]autorelease];
+//    if(!cell){
+//        cell = [[[ResultCellView alloc]init]autorelease];
+//        //[_cellQueue setObject:cell forKey:obj.filePath];
+//    }
     
     if([obj.subObjects count] == 0){
         cell.delegate = self;
@@ -510,7 +538,7 @@
     }else{
         cell.delegate = self;
         cell.node = obj;
-        [obj addObserver:cell forKeyPath:@"isCheck" options:NSKeyValueObservingOptionNew context:@"isCheck"];
+        //[obj addObserver:cell forKeyPath:@"isCheck" options:NSKeyValueObservingOptionNew context:@"isCheck"];
         cell.backgroundColor = [NSColor colorWithCalibratedRed:56/255.0f green:57/255.0f blue:67/255.0f alpha:1.0f];
         
         NSString *file_path = obj.filePath;
@@ -552,17 +580,24 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item{
-    if([[item subObjects]count] > 0)return YES;
     return NO;
 }
 //
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldExpandItem:(id)item{
-    if([[item subObjects]count] > 0) return YES;
+    ScanObj *obj = (ScanObj *)item;
+    if([[item subObjects]count] > 0) {
+        obj.isExpand = YES;
+        return YES;
+    }
     return NO;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldCollapseItem:(id)item{
-    if([[item subObjects]count] > 0) return YES;
+    ScanObj *obj = (ScanObj *)item;
+    if([[item subObjects]count] > 0) {
+        obj.isExpand = NO;
+       return YES;
+    }
     return NO;
 }
 
@@ -612,7 +647,7 @@
                 [self dismissCover];
                 
                 kModuleType clearType = [self moduleTypeForProductID:productID];
-                [CommonFunction clearModule:clearType];
+                [CommonFunction unlockModule:clearType];
                 [self unlockModule:clearType];
             }
         }
@@ -686,7 +721,8 @@
 }
 
 - (void)dealloc{
-    [self.node removeObserver:self forKeyPath:@"isCheck"];
+    //[self.node removeObserver:self forKeyPath:@"isCheck"];
+    [self.node release];
     [super dealloc];
 }
 
@@ -740,7 +776,7 @@
         [self.delegate rightClick:self.node];
     }
     
-    NSMenu *menu = [[NSMenu alloc]init];
+    NSMenu *menu = [[[NSMenu alloc]init]autorelease];
     NSMenuItem *item1 = [[[NSMenuItem alloc]init]autorelease];
     item1.title = @"Show in finder";
     item1.target = self;
@@ -748,7 +784,7 @@
     [menu addItem:item1];
     
     NSMenuItem *item2 = [[[NSMenuItem alloc]init]autorelease];
-    item2.title = @"Preview";
+    item2.title = @"Quick Look ";
     item2.target = self;
     item2.action = @selector(clickMenuItem:);
     [menu addItem:item2];
@@ -781,13 +817,13 @@
         [[QLPreviewPanel sharedPreviewPanel]orderOut:nil];
     }else{
         QLPreviewPanel *viewPanel = [QLPreviewPanel sharedPreviewPanel];
-        viewPanel.delegate = self;
         viewPanel.dataSource = self;
+        id contr = viewPanel.currentController;
         [viewPanel makeKeyAndOrderFront:nil];
     }
 }
 
-/*- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel{
     return 1;
 }
 
@@ -796,14 +832,42 @@
     return previewUrl;
 }
 
-- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item{
-    NSView *superV = self.superview;
-    return superV.frame;
-}
+//- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item{
+//    NSView *superV = self.superview;
+//    return superV.frame;
+//}
 
 - (BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel{
     return YES;
-}*/
+}
+
+- (void)beginPreviewPanelControl:(QLPreviewPanel *)panel{
+    panel.delegate = self;
+    panel.dataSource = self;
+    [panel reloadData];
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel{
+    panel.delegate = nil;
+    panel.dataSource = nil;
+}
+
+- (BOOL)previewPanel:(QLPreviewPanel *)panel handleEvent:(NSEvent *)event
+{
+    return YES;
+}
+
+// This delegate method provides the rect on screen from which the panel will zoom.
+- (NSRect)previewPanel:(QLPreviewPanel *)panel sourceFrameOnScreenForPreviewItem:(id <QLPreviewItem>)item
+{
+    return NSZeroRect;
+}
+
+// This delegate method provides a transition image between the table view and the preview panel
+- (id)previewPanel:(QLPreviewPanel *)panel transitionImageForPreviewItem:(id <QLPreviewItem>)item contentRect:(NSRect *)contentRect
+{
+    return nil;
+}
 
 @end
 

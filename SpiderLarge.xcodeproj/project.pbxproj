@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F80A43EA1AF9AF8100CF09EE /* button_unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A43E91AF9AF8100CF09EE /* button_unlock.png */; };
+		F80A43EC1AF9B51C00CF09EE /* button_cl_b.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */; };
 		F80FC3361AC5243200B21126 /* DragView.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3351AC5243200B21126 /* DragView.m */; };
 		F80FC33A1AC5426A00B21126 /* ResultDetaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80FC3381AC5426A00B21126 /* ResultDetaiViewController.m */; };
 		F80FC33B1AC5426A00B21126 /* ResultDetaiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80FC3391AC5426A00B21126 /* ResultDetaiViewController.xib */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F80A43E91AF9AF8100CF09EE /* button_unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_unlock.png; sourceTree = "<group>"; };
+		F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_cl_b.png; sourceTree = "<group>"; };
 		F80FC3341AC5243200B21126 /* DragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragView.h; path = SpiderLarge/DragView.h; sourceTree = "<group>"; };
 		F80FC3351AC5243200B21126 /* DragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DragView.m; path = SpiderLarge/DragView.m; sourceTree = "<group>"; };
 		F80FC3371AC5426A00B21126 /* ResultDetaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResultDetaiViewController.h; path = SpiderLarge/ResultDetaiViewController.h; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		F8E9B6FA1ACBC79D008368B0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F80A43EB1AF9B51C00CF09EE /* button_cl_b.png */,
+				F80A43E91AF9AF8100CF09EE /* button_unlock.png */,
 				F8DE8EAD1AF8CCB700C2F35E /* NSButton+Addation.h */,
 				F8DE8EAE1AF8CCB700C2F35E /* NSButton+Addation.m */,
 				F8DE8EAF1AF8CCB700C2F35E /* NSColor+AMC.h */,
@@ -330,6 +336,8 @@
 				F8E840C81AC13F2C001CCB5B /* Images.xcassets in Resources */,
 				F8E395871AF7697D007B089D /* DuplicatesWindowController.xib in Resources */,
 				F8EA57E21AEF5B33000D0966 /* icon@2x.icns in Resources */,
+				F80A43EC1AF9B51C00CF09EE /* button_cl_b.png in Resources */,
+				F80A43EA1AF9AF8100CF09EE /* button_unlock.png in Resources */,
 				F8E9B6FC1ACBC79D008368B0 /* button_cl.png in Resources */,
 				F8E840CB1AC13F2C001CCB5B /* MainMenu.xib in Resources */,
 				F8E8D2061AC2A3A400259CDC /* HomeViewController.xib in Resources */,

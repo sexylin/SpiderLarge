@@ -337,13 +337,6 @@
         obj.name = copyName;
     }
     
-    if([archiever.subObjects count]>0)[_nodes addObject:archiever];
-    if([movies.subObjects count]>0)[_nodes addObject:movies];
-    if([music.subObjects count]>0)[_nodes addObject:music];
-    if([documents.subObjects count]>0)[_nodes addObject:documents];
-    if([picture.subObjects count]>0)[_nodes addObject:picture];
-    if([other.subObjects count]>0)[_nodes addObject:other];
-    
     NSComparisonResult(^compareBlock)(id obj1,id obj2);
     
     switch (_sortType) {
@@ -391,6 +384,12 @@
             break;
     }
     
+    if([archiever.subObjects count]>0)[_nodes addObject:archiever];
+    if([movies.subObjects count]>0)[_nodes addObject:movies];
+    if([music.subObjects count]>0)[_nodes addObject:music];
+    if([documents.subObjects count]>0)[_nodes addObject:documents];
+    if([picture.subObjects count]>0)[_nodes addObject:picture];
+    if([other.subObjects count]>0)[_nodes addObject:other];
     [self.table reloadData];
 }
 
@@ -665,7 +664,6 @@
             NSLog(@"恢复上次购买...\n");
         }
 //        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
-//            self.progressingLabel.stringValue = @"Waiting...";
 //            NSLog(@"等待购买...\n");
 //        }
     }

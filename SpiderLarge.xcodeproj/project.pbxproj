@@ -264,6 +264,7 @@
 					};
 					F8E840CF1AC13F2C001CCB5B = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = J59ZUY3B3P;
 						TestTargetID = F8E840BC1AC13F2C001CCB5B;
 					};
 				};
@@ -379,7 +380,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer: LiHua Wang (6FZFXGXC4Q)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -399,7 +400,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
+				PROVISIONING_PROFILE = "b11658b2-efbc-464a-a40c-34ad2ebce760";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -436,7 +437,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
+				PROVISIONING_PROFILE = "b11658b2-efbc-464a-a40c-34ad2ebce760";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -456,7 +457,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -475,7 +476,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a98a0553-8319-49e1-952c-6f88252fbaa1";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -483,6 +484,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -495,6 +498,7 @@
 				INFOPLIST_FILE = SpiderLargeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpiderLarge.app/Contents/MacOS/SpiderLarge";
 			};
 			name = Debug;
@@ -503,6 +507,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -511,6 +517,7 @@
 				INFOPLIST_FILE = SpiderLargeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpiderLarge.app/Contents/MacOS/SpiderLarge";
 			};
 			name = Release;

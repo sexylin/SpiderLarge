@@ -210,13 +210,6 @@
         obj.name = copyName;
     }
     
-    if([archiever.subObjects count]>0)[_nodes addObject:archiever];
-    if([movies.subObjects count]>0)[_nodes addObject:movies];
-    if([music.subObjects count]>0)[_nodes addObject:music];
-    if([documents.subObjects count]>0)[_nodes addObject:documents];
-    if([picture.subObjects count]>0)[_nodes addObject:picture];
-    if([other.subObjects count]>0)[_nodes addObject:other];
-    
     NSComparisonResult(^compareBlock)(id obj1,id obj2);
     
     switch (_sortType) {
@@ -238,7 +231,6 @@
             [music.subObjects sortUsingComparator:compareBlock];
             [picture.subObjects sortUsingComparator:compareBlock];
             [other.subObjects sortUsingComparator:compareBlock];
-            [self.table reloadData];
         }
             break;
         case SortBySize:{
@@ -259,12 +251,20 @@
             [music.subObjects sortUsingComparator:compareBlock];
             [picture.subObjects sortUsingComparator:compareBlock];
             [other.subObjects sortUsingComparator:compareBlock];
-            [self.table reloadData];
         }
             break;
         default:
             break;
     }
+    
+    if([archiever.subObjects count]>0)[_nodes addObject:archiever];
+    if([movies.subObjects count]>0)[_nodes addObject:movies];
+    if([music.subObjects count]>0)[_nodes addObject:music];
+    if([documents.subObjects count]>0)[_nodes addObject:documents];
+    if([picture.subObjects count]>0)[_nodes addObject:picture];
+    if([other.subObjects count]>0)[_nodes addObject:other];
+    
+    [self.table reloadData];
 }
 
 - (void)clickCheckButton:(ScanObj *)obj{
@@ -457,9 +457,9 @@
         {
             NSLog(@"恢复上次购买...\n");
         }
-        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
-            NSLog(@"等待购买...\n");
-        }
+//        else if(transaction.transactionState == SKPaymentTransactionStateDeferred){
+//            NSLog(@"等待购买...\n");
+//        }
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#define kTextColor [NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f]
 
 @interface NSImage(strechable)
 + (NSImage *)stretchableImageWithLeftWidth:(CGFloat)leftWidth

@@ -37,7 +37,7 @@
         [backgroundColor set];
         NSRectFill(dirtyRect);
     }
-    
+    [super drawRect:dirtyRect];
 }
 
 @end

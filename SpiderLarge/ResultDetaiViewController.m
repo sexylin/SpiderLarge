@@ -32,8 +32,9 @@
 
 @implementation ResultDetaiViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
     _sortType = SortBySize;
     
     archiever = [[ScanObj alloc]init];
@@ -106,7 +107,6 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textDidChange:) name:NSControlTextDidChangeNotification object:nil];
     
-    // Do view setup here.
 }
 
 - (void)reloadTable{
@@ -423,6 +423,8 @@
 }
 
 - (void)selectObj:(ScanObj *)obj{
+    [self.view.window makeFirstResponder:nil];
+    
     if([obj.subObjects count] > 0){
         if(![self.table isItemExpanded:obj]){
             [self.table expandItem:obj];
@@ -696,16 +698,19 @@
         pathLabel.editable = NO;
         [[pathLabel cell]setLineBreakMode:NSLineBreakByTruncatingMiddle];
         pathLabel.bordered = NO;
+        [pathLabel setTextColor:kTextColor];
         
         sizeLabel = [[NSTextField alloc]init];
         sizeLabel.backgroundColor = [NSColor clearColor];
         sizeLabel.editable = NO;
         sizeLabel.bordered = NO;
+        [sizeLabel setTextColor:kTextColor];
         
         dateLabel = [[NSTextField alloc]init];
         dateLabel.backgroundColor = [NSColor clearColor];
         dateLabel.editable = NO;
         dateLabel.bordered = NO;
+        [dateLabel setTextColor:kTextColor];
         
         horizon = [[NSBox alloc]init];
         horizon.boxType = NSBoxCustom;

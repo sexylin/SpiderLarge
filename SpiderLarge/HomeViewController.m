@@ -20,14 +20,17 @@
 
 @implementation HomeViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
+    self.dragView.delegate = self;
+    [self.dragView startUpdate];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(backToHome) name:@"BACK_TO_HOME" object:nil];
     
-    UIView *view = self.view;
-    view.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
-    view.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
+    UIView *mainView = self.view;
+    mainView.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
+    mainView.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
     
     _toolBar.startColor = [NSColor colorWithCalibratedRed:58/255.0 green:56/255.0 blue:67/255.0 alpha:1.0f];
     _toolBar.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
@@ -49,13 +52,7 @@
     
     NSAttributedString *attstr = [[NSAttributedString alloc]initWithString:@"Drag Folder Here Or  Click To Add Folder " attributes:@{NSForegroundColorAttributeName:[NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f],NSParagraphStyleAttributeName:parastyle,NSFontAttributeName:[NSFont systemFontOfSize:14.0f]}];
     [_addButton setAttributedTitle:attstr];
-    // Do view setup here.
-}
-
-- (void)awakeFromNib{
-    [super awakeFromNib];
-    self.dragView.delegate = self;
-    [self.dragView startUpdate];
+    
 }
 
 - (IBAction)clickAddButton:(id)sender{

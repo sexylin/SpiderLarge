@@ -12,7 +12,6 @@
 
 #define k_left_cap_width 15.0
 #define k_right_cap_width 15.0
-#define kTextColor [NSColor colorWithCalibratedRed:215/255.0 green:215/255.0 blue:215/255.0 alpha:1.0f]
 
 @implementation NSImage(strechable)
 

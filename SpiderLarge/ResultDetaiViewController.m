@@ -117,6 +117,7 @@
 }
 
 - (IBAction)backToHome:(id)sender{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"BACK_TO_HOME" object:nil];
     [self.view removeFromSuperview];
 }
 

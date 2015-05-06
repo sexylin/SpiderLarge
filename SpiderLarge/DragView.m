@@ -48,6 +48,14 @@
     [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateDrawIndex) userInfo:nil repeats:YES];
 }
 
+- (void)enableDrag:(BOOL)flag{
+    if(flag){
+        [self registerForDraggedTypes:@[NSFilenamesPboardType]];
+    }else{
+        [self unregisterDraggedTypes];
+    }
+}
+
 #pragma mark - drag delegate
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender{

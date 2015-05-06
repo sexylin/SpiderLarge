@@ -17,4 +17,5 @@
 @interface DragView : NSView
 @property (nonatomic,assign)NSObject <DragFilesDelegate> *delegate;
 - (void)startUpdate;
+- (void)enableDrag:(BOOL)flag;
 @end

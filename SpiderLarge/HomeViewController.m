@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(backToHome) name:@"BACK_TO_HOME" object:nil];
+    
     UIView *view = self.view;
     view.endColor = [NSColor colorWithCalibratedRed:57/255.0 green:55/255.0 blue:68/255.0 alpha:1.0f];
     view.startColor = [NSColor colorWithCalibratedRed:80/255.0 green:82/255.0 blue:92/255.0 alpha:1.0f];
@@ -92,6 +94,13 @@
     
     resultVC = [[ResultDetaiViewController alloc]initWithNibName:@"ResultDetaiViewController" bundle:nil];
     [self.view addSubview:resultVC.view];
+    [self.dragView enableDrag:NO];
+    [_addFolder setEnabled:NO];
+}
+
+- (void)backToHome{
+    [self.dragView enableDrag:YES];
+    [_addFolder setEnabled:YES];
 }
 
 - (void)closeProgress{
